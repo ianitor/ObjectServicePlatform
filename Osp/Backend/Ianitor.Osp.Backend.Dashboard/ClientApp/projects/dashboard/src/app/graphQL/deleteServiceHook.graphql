@@ -1,0 +1,3 @@
+mutation deleteServiceHook($entities: [DeletionSystemServiceHookInput]!) {
+  deleteSystemServiceHooks(entities: $entities)
+}

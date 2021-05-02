@@ -1,0 +1,80 @@
+﻿@using IdentityServer4.Extensions
+@using Microsoft.AspNetCore.Identity
+@using Ianitor.Osp.Backend.Persistence.SystemEntities
+@inject UserManager<OspUser> UserManager
+
+@{
+    var user = User == null ? null : await UserManager.GetUserAsync(User);
+    bool hasPassword = false;
+    if (user != null)
+    {
+        hasPassword = await UserManager.HasPasswordAsync(user);
+    }
+}
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color:#3f51b5">
+        <div class="order-0">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@OemOptions.Value.ApplicationName</a>
+        </div>
+        <div class="navbar-collapse collapse w-50 order-3" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                @if (User.IsAuthenticated())
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @Texts.Backend_Identity_Navigation_Profile_Header
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-area="" asp-controller="Manage" asp-action="Index">@Texts.Backend_Identity_Navigation_Manage_Header</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Manage" asp-action="ManageLogins">@Texts.Backend_Identity_Navigation_ManageLogIns_Header</a>
+
+                            @if (hasPassword)
+                            {
+                                <a class="dropdown-item" asp-area="" asp-controller="Manage" asp-action="ChangePassword">@Texts.Backend_Identity_Navigation_ChangePassword_Header</a>
+                            }
+                            else
+                            {
+                                <a class="dropdown-item" asp-area="" asp-controller="Manage" asp-action="SetPassword">@Texts.Backend_Identity_Navigation_ChangePassword_Header</a>
+                            }
+                            <a class="dropdown-item" asp-area="" asp-controller="Grants" asp-action="Index">@Texts.Backend_Identity_Navigation_Grants_Header</a>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @Texts.Backend_Identity_Navigation_Development_Header
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="~/swagger/">@Texts.Backend_Identity_Navigation_API_Header</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Diagnostics" asp-action="Index">@Texts.Backend_Identity_Navigation_Diagnostics_Header</a>
+                            <a class="dropdown-item" href="~/.well-known/openid-configuration">@Texts.Backend_Identity_Navigation_DiscoveryDocument_Header</a>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Device" asp-action="Index">@Texts.Backend_Identity_Navigation_DeviceLogin_Header</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">@Texts.Backend_Identity_Navigation_Logout_Header</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">@Texts.Backend_Identity_Navigation_Login_Header</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+</header>

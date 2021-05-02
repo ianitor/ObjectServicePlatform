@@ -1,0 +1,39 @@
+<div *ngIf="loading">
+  <mat-progress-bar class="w-100" mode="query"></mat-progress-bar>
+</div>
+
+<div fxLayout="column" fxLayoutGap="12px" style="padding-top: 10px">
+  <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end">
+
+    <div fxLayout="row" fxFlex="15" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <button fxFlex mat-raised-button type="button" (click)="save()"
+              [disabled]="templateForm.invalid">
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="templateForm" novalidate>
+  <mat-form-field>
+    <input matInput placeholder="Template name" type="text" formControlName="wellKnownName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Subject" type="text" formControlName="subjectTemplate">
+  </mat-form-field>
+
+  <div>
+
+    <mat-label>Body</mat-label>
+    <angular-markdown-editor textareaId="editor1" [options]="editorOptions" rows="12"
+                             formControlName="bodyTemplate">
+    </angular-markdown-editor>
+  </div>
+</form>
+
+<hr/>
+<h3 class="text-success bold">Preview of body</h3>
+<div>
+  <markdown [data]="notificationTemplateDetails.bodyTemplate"></markdown>
+</div>

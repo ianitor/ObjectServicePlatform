@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Common\osp.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Common\osp.snk" Link="osp.snk" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.14" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Ianitor.Osp.Common.Shared\Ianitor.Osp.Common.Shared.csproj" />
+    <ProjectReference Include="..\Ianitor.Osp.Backend.Infrastructure\Ianitor.Osp.Backend.Infrastructure.csproj" />
+    <ProjectReference Include="..\Ianitor.Osp.Backend.Persistence\Ianitor.Osp.Backend.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

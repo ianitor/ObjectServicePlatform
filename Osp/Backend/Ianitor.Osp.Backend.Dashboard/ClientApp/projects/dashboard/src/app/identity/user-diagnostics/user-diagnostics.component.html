@@ -1,0 +1,12 @@
+
+<div class="row jumbotron mt-2 justify-content-center">
+  <h1>Authentication data for {{diagnostics?.name}}</h1>
+</div>
+
+<h3>Claims</h3>
+<dl>
+  <div *ngFor="let claim of diagnostics?.claims">
+    <dt>{{claim.key}}</dt>
+    <dd>{{claim.value}}</dd>
+  </div>
+</dl>

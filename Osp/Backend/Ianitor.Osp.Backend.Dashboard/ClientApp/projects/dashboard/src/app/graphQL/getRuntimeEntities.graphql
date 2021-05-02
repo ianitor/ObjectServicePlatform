@@ -1,0 +1,29 @@
+query getRuntimeEntities($ckId:String!,
+  $after: String
+  $first: Int
+  $searchFilter: SearchFilter
+  $fieldFilters: [FieldFilter]
+  $sort: [Sort],
+  $attributeNames:[String!]!
+) {
+  runtimeEntities(
+    ckId: $ckId,
+    after: $after
+    first: $first
+    searchFilter: $searchFilter
+    fieldFilter: $fieldFilters
+    sortOrder: $sort) {
+    totalCount
+    items {
+      rtId
+      wellKnownName
+      attributes(attributeNames: $attributeNames) {
+        items {
+          attributeName
+          value
+          values
+        }
+      }
+    }
+  }
+}

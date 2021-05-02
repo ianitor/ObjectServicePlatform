@@ -1,0 +1,15 @@
+
+.mat-column-attributeId {
+  flex: 0 0 50% !important;
+  width: 10% !important;
+}
+
+.mat-column-attributeValueType {
+  flex: 0 0 20% !important;
+  width: 10% !important;
+}
+
+.mat-column-scopeId {
+  flex: 0 0 20% !important;
+  width: 10% !important;
+}

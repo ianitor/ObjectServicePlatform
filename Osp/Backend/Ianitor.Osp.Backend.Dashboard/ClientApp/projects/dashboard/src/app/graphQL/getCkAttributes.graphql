@@ -1,0 +1,22 @@
+query getCkAttributes(
+  $after: String
+  $first: Int
+  $searchFilter: SearchFilter
+  $fieldFilters: [FieldFilter]
+  $sort: [Sort]
+) {
+  constructionKitAttributes(
+    after: $after
+    first: $first
+    searchFilter: $searchFilter
+    fieldFilter: $fieldFilters
+    sortOrder: $sort
+  ) {
+    totalCount
+    items {
+      attributeId
+      attributeValueType
+      scopeId
+    }
+  }
+}

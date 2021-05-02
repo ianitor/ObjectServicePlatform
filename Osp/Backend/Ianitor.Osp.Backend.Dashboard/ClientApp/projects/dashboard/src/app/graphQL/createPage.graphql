@@ -1,0 +1,7 @@
+mutation createPage($entities: [SystemUIPageInput]!) {
+  createSystemUIPages(entities: $entities) {
+    rtId
+    wellKnownName
+    content
+  }
+}

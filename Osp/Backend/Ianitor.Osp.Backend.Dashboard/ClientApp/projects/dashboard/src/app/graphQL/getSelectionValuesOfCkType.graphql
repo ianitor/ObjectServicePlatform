@@ -1,0 +1,19 @@
+query getSelectionValuesOfCkType($ckId: String!, $attributeNames: [String]!) {
+  constructionKitTypes(ckId: $ckId) {
+    items {
+      ckId
+      attributes(attributeNames: $attributeNames) {
+        items {
+          attributeName
+          attribute {
+            selectionValues {
+              key
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

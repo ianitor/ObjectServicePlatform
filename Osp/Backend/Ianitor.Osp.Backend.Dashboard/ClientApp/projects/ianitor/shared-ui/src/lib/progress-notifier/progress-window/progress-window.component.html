@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <mat-progress-bar *ngIf="data.isDeterminate"  [value]="progressValue" mode="determinate"></mat-progress-bar>
+    <mat-progress-bar *ngIf="!data.isDeterminate" mode="indeterminate"></mat-progress-bar>
+    <p>{{statusText}}</p>
+  </div>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button *ngIf="data.isCancelOperationAvailable" (click)="onCancelClick()">Cancel</button>
+</div>

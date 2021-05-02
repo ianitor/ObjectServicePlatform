@@ -1,0 +1,78 @@
+@model Ianitor.Osp.Backend.Identity.ViewModels.Consent.ConsentViewModel
+@{
+    ViewBag.Title = Texts.Backend_Identity_Consent_Tile;
+}
+
+<div class="row justify-content-center">
+    @if (Model.ClientLogoUrl != null)
+    {
+        <div class="client-logo">
+            <img src="@Model.ClientLogoUrl" alt="">
+        </div>
+    }
+    <h1>
+        @Model.ClientName
+        <small>@Texts.Backend_Identity_Consent_RequestPermission_Label</small>
+    </h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-sm-4 text-center text-info">
+        <i class="k-icon k-i-warning"></i>
+        <strong>@Texts.Backend_Identity_Consent_UncheckGrants_Label</strong>
+    </div>
+</div>
+
+        <form asp-action="Index" class="consent-form">
+            <input type="hidden" asp-for="ReturnUrl"/>
+
+    <div class="row justify-content-center">
+        <partial name="_ValidationSummary"/>
+                </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex flex-wrap justify-content-center">
+                <partial name="_PersonalInfo"></partial>
+                <partial name="_ApplicationAccess"></partial>
+                    </div>
+                    </div>
+                </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+
+            @if (Model.AllowRememberConsent)
+            {
+                <div class="consent-remember mt-2">
+                    <label>
+                        <input class="consent-scopecheck" asp-for="RememberConsent"/>
+                        <strong>@Texts.Backend_Identity_Consent_RememberDecision_Label</strong>
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <div class="form-group">
+                <button name="button" value="yes" class="k-button k-primary" autofocus>@Texts.Backend_Identity_Consent_Allow_Label</button>
+                <button name="button" value="no" class="k-button">@Texts.Backend_Identity_Consent_Disallow_Label</button>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+                @if (Model.ClientUrl != null)
+                {
+                <a target="_blank" href="@Model.ClientUrl">
+                    <i class="k-icon k-i-information"></i>
+                        <strong>@Model.ClientName</strong>
+                    </a>
+                }
+            </div>
+    </div>
+</form>

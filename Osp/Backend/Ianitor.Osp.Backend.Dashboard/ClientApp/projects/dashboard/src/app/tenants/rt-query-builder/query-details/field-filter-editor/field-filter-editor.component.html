@@ -1,0 +1,75 @@
+<mat-table fxFill mat-table [dataSource]="fieldFilterDataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(element) : null"
+                    [checked]="selection.isSelected(element)">
+      </mat-checkbox>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+    </mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="attributeName">
+    <mat-header-cell *matHeaderCellDef> Column</mat-header-cell>
+    <mat-cell *matCellDef="let element let i = index;">
+      <span class="mobile-label">Column:</span>
+      <mat-form-field>
+        <mat-select required [value]="element.attributeName" [(ngModel)]="element.attributeName" name="attributeName-{{i}}">
+          <mat-option *ngFor="let attribute of fieldFilterBuilder.dataColumns" [value]="attribute">
+            {{attribute}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+      <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="4px" style="padding-left: 5px">
+        <button mat-raised-button (click)="addNewRow()" [disabled]="!fieldFilterBuilder?.queryCkId">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+        <button mat-raised-button (click)="removeRow()" [disabled]="selection.isEmpty()">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </div>
+    </mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="operator">
+    <mat-header-cell *matHeaderCellDef> Operator</mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index;">
+      <span class="mobile-label">Operator:</span>
+      <mat-form-field>
+        <mat-select required [value]="element.operator" [(ngModel)]="element.operator" name="operator-{{i}}">
+          <mat-option *ngFor="let fieldFilterOperator of fieldFilterOperator" [value]="fieldFilterOperator">
+            {{fieldFilterOperator}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+    </mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="comparisonValue">
+    <mat-header-cell *matHeaderCellDef> Value</mat-header-cell>
+    <mat-cell *matCellDef="let element let i = index;">
+      <span class="mobile-label">Value:</span>
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.comparisonValue" [(ngModel)]="element.comparisonValue" name="comparisonValue-{{i}}">
+      </mat-form-field>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+    </mat-footer-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="fieldFilterDisplayColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: fieldFilterDisplayColumns;"></mat-row>
+  <mat-footer-row *matFooterRowDef="fieldFilterDisplayColumns"></mat-footer-row>
+</mat-table>

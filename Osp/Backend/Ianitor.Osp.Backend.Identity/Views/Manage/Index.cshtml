@@ -1,0 +1,50 @@
+﻿@model Ianitor.Osp.Backend.Identity.ViewModels.Manage.IndexViewModel
+@{
+    ViewData["Title"] = @Texts.Backend_Identity_ManageProfile_Title;
+}
+
+<div class="row justify-content-center">
+    <h1>@Texts.Backend_Identity_ManageProfile_Title</h1>
+</div>
+<div class="row justify-content-center">
+    <p>@Texts.Backend_Identity_ManageProfile_Subtitle</p>
+</div>
+
+<div class="row justify-content-center">
+<p class="text-success">@ViewData["StatusMessage"]</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="d-flex flex-wrap">
+        <partial name="UserInfo"></partial>
+
+        <div class="k-card m-2">
+            <div class="k-card-header">
+                <h5 class="k-card-title">
+                    <p>@Texts.Backend_Identity_Actions_Header</p>
+                </h5>
+            </div>
+            <div class="k-card-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a asp-controller="Manage" asp-action="ManageLogins" class="nav-link">@string.Format(Texts.Backend_Identity_Actions_ManageLogins_Header, Model.Logins.Count)</a>
+                    </li>
+                    <li class="nav-item">
+            @if (Model.HasPassword)
+            {
+                            <a asp-controller="Manage" asp-action="ChangePassword" class="nav-link">@Texts.Backend_Identity_Actions_ChangePassword_Header</a>
+                }
+                else
+                {
+                            <a asp-controller="Manage" asp-action="SetPassword" class="nav-link">@Texts.Backend_Identity_Actions_CreatePassword_Header</a>
+                }
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Grants" asp-action="Index" class="nav-link">@Texts.Backend_Identity_Actions_Grants_Header</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

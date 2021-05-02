@@ -1,0 +1,11 @@
+mutation createServiceHook($entities: [SystemServiceHookInput]!) {
+  createSystemServiceHooks(entities: $entities) {
+    rtId
+    enabled
+    name
+    queryCkId
+    serviceHookAction
+    serviceHookBaseUri
+    fieldFilter
+  }
+}

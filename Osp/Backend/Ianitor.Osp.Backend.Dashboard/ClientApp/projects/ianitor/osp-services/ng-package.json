@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/ianitor/osp-services",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "apollo-cache-inmemory": "apollo-cache-inmemory",
+      "@apollo/client/core": "@apollo/client/core",
+      "@ianitor/shared-services": "@ianitor/shared-services"
+    }
+  }
+}

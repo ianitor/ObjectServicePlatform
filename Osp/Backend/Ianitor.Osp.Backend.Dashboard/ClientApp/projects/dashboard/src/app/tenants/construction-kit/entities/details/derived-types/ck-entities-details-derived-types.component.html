@@ -1,0 +1,30 @@
+
+<mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort
+           matSortActive="serviceNumber"
+           matSortDirection="asc" matSortDisableClear [class.isMobile]="isMobile">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- ckId Column -->
+  <ng-container matColumnDef="ckId">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Construction Kit ID</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <span class="mobile-label">Construction Kit ID:</span>
+      {{element.ckId}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Action Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-button routerLink="../../entities/{{element.ckId}}">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

@@ -1,0 +1,20 @@
+query getCkEntityAttribute($ckId: String!, $attributeName: String!) {
+  constructionKitTypes(ckId: $ckId) {
+    items {
+      ckId
+
+      attributes(attributeNames: [$attributeName]) {
+        items {
+          attributeName
+          attributeId
+          autoCompleteTexts
+          isAutoCompleteEnabled
+          autoCompleteTexts
+          autoCompleteFilter
+          autoCompleteLimit
+          autoIncrementReference
+        }
+      }
+    }
+  }
+}

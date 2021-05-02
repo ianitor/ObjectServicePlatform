@@ -1,0 +1,26 @@
+{
+  "name": "sg-identity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@progress/kendo-theme-default": "^4.19.0",
+    "@progress/kendo-theme-material": "^3.16.0",
+    "@progress/kendo-ui": "2020.2.617",
+    "bootstrap": "^4.5.0",
+    "css-loader": "^3.6.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "style-loader": "^1.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}

@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html>
+<partial name="_LayoutHead"/>
+
+<body class="k-content">
+<partial name="_Navigation"/>
+
+<main role="main" class="m-2">
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+</main>
+
+<partial name="_LayoutFooter"/>
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

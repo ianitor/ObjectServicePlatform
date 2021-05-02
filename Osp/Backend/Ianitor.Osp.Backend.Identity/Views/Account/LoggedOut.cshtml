@@ -1,0 +1,42 @@
+﻿@model Ianitor.Osp.Backend.Identity.ViewModels.Account.LoggedOutViewModel
+@{
+    // set this so the layout rendering sees an anonymous user
+    ViewData["signed-out"] = true;
+    ViewData["Title"] = @Texts.Backend_Identity_LoggedOut_Title;
+    Layout = "_LayoutNoNavigation";
+}
+
+<div class="row justify-content-center">
+    <div class="k-card">
+        <div class="k-card-header">
+            <div class="k-card-title">
+        <h1>@Texts.Backend_Identity_LoggedOut_Title</h1>
+    </div>
+        </div>
+        <div class="k-card-body">
+            <p>@string.Format(Texts.Backend_Identity_LoggedOut_LoggedOutMessage, OemOptions.Value.ApplicationName)</p>
+        </div>
+        <div class="k-card-actions">
+    @if (Model.PostLogoutRedirectUri != null)
+    {
+                <a class="PostLogoutRedirectUri"
+                   href="@Model.PostLogoutRedirectUri">
+                    @string.Format(Texts.Backend_Identity_LoggedOut_RedirectMessage, Model.ClientName)
+                </a>
+            }
+        </div>
+        </div>
+</div>
+
+    @if (Model.SignOutIframeUrl != null)
+    {
+    <iframe width="0" height="0" src="@Model.SignOutIframeUrl"></iframe>
+    }
+
+@section scripts
+{
+    @if (Model.AutomaticRedirectAfterSignOut)
+    {
+    <script src="~/js/signout-redirect.js"></script>
+    }
+}

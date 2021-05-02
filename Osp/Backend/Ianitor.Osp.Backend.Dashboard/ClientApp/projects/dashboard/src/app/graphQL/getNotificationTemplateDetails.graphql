@@ -1,0 +1,25 @@
+query getNotificationTemplateDetails($rtId: OspObjectIdType) {
+  systemNotificationTemplateConnection(rtId: $rtId) {
+    items {
+      constructionKitType {
+        attributes(attributeNames: ["type"]) {
+          items {
+            attributeName
+            attributeValueType
+            attribute{
+              selectionValues {
+                key
+                name
+              }
+            }
+          }
+        }
+      }
+      rtId
+      wellKnownName
+      type
+      subjectTemplate
+      bodyTemplate
+    }
+  }
+}

@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\..\Common\osp.snk</AssemblyOriginatorKeyFile>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <OutputPath>..\..\..\bin\Debug\BackendJobs</OutputPath>
+        <DocumentationFile>..\..\..\bin\Debug\BackendCommon\Ianitor.Osp.Backend.Jobs.xml</DocumentationFile>
+        <NoWarn>1701;1702;CS8002</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <OutputPath>..\..\..\bin\Release\BackendJobs</OutputPath>
+        <DocumentationFile>..\..\..\bin\Release\BackendCommon\Ianitor.Osp.Backend.Jobs.xml</DocumentationFile>
+        <NoWarn>1701;1702;CS8002</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\..\Common\osp.snk">
+        <Link>osp.snk</Link>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Hangfire.Core" Version="1.7.22" />
+        <PackageReference Include="NLog" Version="4.7.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Ianitor.Osp.Backend.Common\Ianitor.Osp.Backend.Common.csproj" />
+        <ProjectReference Include="..\Ianitor.Osp.Backend.Persistence\Ianitor.Osp.Backend.Persistence.csproj" />
+    </ItemGroup>
+
+
+</Project>

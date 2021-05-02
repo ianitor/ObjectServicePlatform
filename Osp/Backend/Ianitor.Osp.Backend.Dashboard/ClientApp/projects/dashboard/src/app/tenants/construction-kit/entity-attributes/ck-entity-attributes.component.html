@@ -1,0 +1,47 @@
+<mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort
+           matSortActive="attributeName"
+           matSortDirection="asc" matSortDisableClear [class.isMobile]="isMobile">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- attributeName Column -->
+  <ng-container matColumnDef="attributeName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <span class="mobile-label">Name:</span>
+      {{element.attributeName}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- attributeId Column -->
+  <ng-container matColumnDef="attributeId">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <span class="mobile-label">ID:</span>
+      {{element.attributeId}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- attributeValueType Column -->
+  <ng-container matColumnDef="attributeValueType">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Type</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <span class="mobile-label">Type:</span>
+      {{element.attributeValueType}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Action Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-button routerLink="attributes/{{element.attributeName}}">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

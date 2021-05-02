@@ -1,0 +1,3 @@
+mutation deletePage($entities: [DeletionSystemUIPageInput]!) {
+  deleteSystemUIPages(entities: $entities)
+}

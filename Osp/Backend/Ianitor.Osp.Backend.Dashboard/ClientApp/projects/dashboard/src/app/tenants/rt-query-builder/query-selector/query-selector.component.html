@@ -1,0 +1,7 @@
+<div [formGroup]="ownerForm">
+  <mat-form-field>
+    <ia-entity-select [dataSource]="querySelectDataSource" placeholder="Query name"
+                     formControlName="querySelect"></ia-entity-select>
+    <mat-error *ngIf="hasError('querySelect', 'incorrect')">Please select attribute form selection list!</mat-error>
+  </mat-form-field>
+</div>

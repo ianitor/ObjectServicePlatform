@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\..\Common\osp.snk</AssemblyOriginatorKeyFile>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <OutputPath>..\..\..\bin\Debug\BackendDistributedCache</OutputPath>
+        <DocumentationFile>..\..\..\bin\Debug\BackendDistributedCache\Ianitor.Osp.Backend.DistributedCache.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <OutputPath>..\..\..\bin\Release\BackendDistributedCache</OutputPath>
+        <DocumentationFile>..\..\..\bin\Release\BackendDistributedCache\Ianitor.Osp.Backend.DistributedCache.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\..\Common\osp.snk">
+        <Link>osp.snk</Link>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Ianitor.Common.Shared" Version="3.0.2005.4001" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+      <PackageReference Include="StackExchange.Redis" Version="2.2.14" />
+    </ItemGroup>
+
+</Project>

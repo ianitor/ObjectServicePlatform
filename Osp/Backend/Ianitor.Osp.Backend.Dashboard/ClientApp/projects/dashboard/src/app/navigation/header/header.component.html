@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <button mat-button routerLink="/" fxHide.xs>Home</button>
+  <button mat-button [matMenuTriggerFor]="devMenu" *ngIf="(isAuthenticated | async)" fxHide.xs>Development</button>
+  <mat-menu #devMenu="matMenu">
+    <a mat-menu-item href="{{configurationService.config.jobServices}}swagger">Swagger (JobServices)</a>
+    <a mat-menu-item href="{{configurationService.config.coreServices}}swagger" >Swagger (CoreServices)</a>
+    <a mat-menu-item href="{{configurationService.config.issuer}}swagger" >Swagger (IdentityServices)</a>
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="/identity/userDiagnostics">User Diagnostics</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="(isAdmin | async)">Identity</button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item routerLink="/identity/users">Users</button>
+    <button mat-menu-item routerLink="/identity/roles">Roles</button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="/identity/clients">Clients</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="tenantsMenu" *ngIf="(isAuthenticated | async)">Administration</button>
+  <mat-menu #tenantsMenu="matMenu">
+    <button mat-menu-item routerLink="/tenants">Tenants</button>
+    <a mat-menu-item href="{{configurationService.config.jobServices}}ui/jobs">Jobs</a>
+  </mat-menu>
+
+
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+      <li *ngIf="!(isAuthenticated | async)">
+        <button mat-button (click)="login()">Login</button>
+      </li>
+      <li *ngIf="(isAuthenticated | async)">
+        <button mat-button (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

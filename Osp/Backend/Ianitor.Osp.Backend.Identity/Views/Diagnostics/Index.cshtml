@@ -1,0 +1,72 @@
+@model Ianitor.Osp.Backend.Identity.ViewModels.Diagnostics.DiagnosticsViewModel
+@{
+    ViewBag.Title = Texts.Backend_Identity_Navigation_Diagnostics_Title;
+}
+<div class="row justify-content-center">
+    <div class="col-3">
+        <div class="k-card">
+
+            <div class="k-card-header">
+                <div class="k-card-title">
+                    @Texts.Backend_Identity_Claims_Label
+                </div>
+            </div>
+            <div class="k-card-body">
+                <dl>
+                    @foreach (var claim in Model.AuthenticateResult.Principal.Claims)
+                    {
+                        <dt>@claim.Type</dt>
+                        <dd>@claim.Value</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="k-card">
+
+            <div class="k-card-header">
+                <div class="k-card-title">
+                    @Texts.Backend_Identity_Properties_Label
+                </div>
+            </div>
+            <div class="k-card-body">
+                <dl>
+                    @foreach (var prop in Model.AuthenticateResult.Properties.Items)
+                    {
+                        <dt>@prop.Key</dt>
+                        <dd>@prop.Value</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="k-card">
+
+            <div class="k-card-header">
+                <div class="k-card-title">
+                    @Texts.Backend_Identity_Clients_Label
+                </div>
+            </div>
+            <div class="k-card-body">
+
+                @if (Model.Clients.Any())
+                {
+                    <ul>
+                        @foreach (var client in Model.Clients)
+                        {
+                            <li>@client</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>@Texts.Backend_Identity_Clients_NoClientsFound</p>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

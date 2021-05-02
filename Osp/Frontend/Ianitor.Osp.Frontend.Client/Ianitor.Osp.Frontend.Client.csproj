@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Client side odata library to access Object Service Platform</Description>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Common\osp.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\bin\Debug\Shared\Frontend\</OutputPath>
+    <NoWarn>1701;1702;CS8002</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\..\bin\Release\Shared\Frontend\</OutputPath>
+    <NoWarn>1701;1702;CS8002</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Common\osp.snk" Link="osp.snk" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL.Client" Version="3.2.3" />
+    <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="3.2.3" />
+    <PackageReference Include="Ianitor.Common.CommandLineParser" Version="3.0.2005.4001" />
+    <PackageReference Include="Ianitor.Common.Shared" Version="3.0.2005.4001" />
+    <PackageReference Include="IdentityModel" Version="5.1.0" />
+    <PackageReference Include="NLog" Version="4.7.9" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Ianitor.Osp.Common.Shared\Ianitor.Osp.Common.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

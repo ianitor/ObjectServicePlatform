@@ -1,0 +1,146 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <Description>Object Service Platform UI for administration and authentication</Description>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\..\Common\osp.snk</AssemblyOriginatorKeyFile>
+        <RootNamespace>Ianitor.Osp.Backend.Dashboard</RootNamespace>
+
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+        <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+        <IsPackable>false</IsPackable>
+        <SpaRoot>ClientApp\</SpaRoot>
+        <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+        <!-- Set this to true if you enable server-side prerendering -->
+        <BuildServerSideRenderer>false</BuildServerSideRenderer>
+        <UserSecretsId>5AB4D22F-3606-4364-9A2C-654385CC761B</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <OutputPath>..\..\..\bin\Debug\Dashboard\</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <OutputPath>..\..\..\bin\Release\Dashboard\</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.10" />
+        <PackageReference Include="NLog.Web.AspNetCore" Version="4.10.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Don't publish the SPA source files, but do show them in the project files list -->
+        <Content Remove="$(SpaRoot)**" />
+        <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\..\Common\osp.snk">
+        <Link>osp.snk</Link>
+      </None>
+      <None Include="nlog.config">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\Ianitor.Osp.Common.Shared\Ianitor.Osp.Common.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-auth\ng-package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-auth\package-lock.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-auth\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-auth\tsconfig.lib.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-auth\tsconfig.lib.prod.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-auth\tsconfig.spec.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-auth\tslint.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-ui\ng-package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-ui\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-ui\tsconfig.lib.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-ui\tsconfig.lib.prod.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-ui\tsconfig.spec.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\shared-ui\tslint.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\osp-services\ianitor-osp-services.metadata.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\osp-services\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\osp-ui\ianitor-osp-ui.metadata.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\osp-ui\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\shared-auth\ianitor-shared-auth.metadata.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\shared-auth\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\shared-ui\ianitor-shared-ui.metadata.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\shared-ui\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\__ngcc_entry_points__.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\ianitor\osp-services\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\ianitor\osp-ui\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\ianitor\shared-auth\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\ianitor\shared-services\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\dist\ianitor\shared-ui\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\dashboard\tsconfig.app.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\dashboard\tsconfig.spec.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\dashboard\tslint.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-services\ng-package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-services\package-lock.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-services\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-services\tsconfig.lib.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-services\tsconfig.lib.prod.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-services\tsconfig.spec.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-services\tslint.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-ui\ng-package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-ui\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-ui\tsconfig.lib.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-ui\tsconfig.lib.prod.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-ui\tsconfig.spec.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\osp-ui\tslint.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-auth\ng-package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-auth\package-lock.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-auth\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-auth\tsconfig.lib.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-auth\tsconfig.lib.prod.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-auth\tsconfig.spec.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-auth\tslint.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-services\ng-package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-services\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-services\tsconfig.lib.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-services\tsconfig.lib.prod.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-services\tsconfig.spec.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-services\tslint.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-ui\ng-package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-ui\package-lock.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-ui\package.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-ui\tsconfig.lib.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-ui\tsconfig.lib.prod.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-ui\tsconfig.spec.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\projects\ianitor\shared-ui\tslint.json" />
+    </ItemGroup>
+
+    <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+        <!-- Ensure Node.js is installed -->
+        <Exec Command="node --version" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+        <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+        <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+        <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    </Target>
+
+    <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+        <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+        <Exec WorkingDirectory="$(SpaRoot)" Command="npm install --unsafe-perm" />
+        <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+        <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+        <!-- Include the newly-built files in the publish output -->
+        <ItemGroup>
+            <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+            <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+                <RelativePath>%(DistFiles.Identity)</RelativePath>
+                <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            </ResolvedFileToPublish>
+        </ItemGroup>
+    </Target>
+</Project>

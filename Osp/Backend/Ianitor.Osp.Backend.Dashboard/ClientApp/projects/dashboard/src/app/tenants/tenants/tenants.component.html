@@ -1,0 +1,128 @@
+<div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div fxLayout="column" fxLayoutGap="10px" style="padding-top: 10px">
+
+  <div fxLayout="row" fxLayoutGap="8px">
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <button fxFlex mat-raised-button type="button" routerLink="new">
+          <mat-icon>add</mat-icon> New
+      </button>
+      <button fxFlex mat-raised-button type="button" routerLink="attach">
+        <mat-icon>insert_link</mat-icon> Attach
+      </button>
+    </div>
+
+  </div>
+
+  <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="serviceNumber"
+             matSortDirection="asc" matSortDisableClear [class.isMobile]="isMobile">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Tenant ID Column -->
+    <ng-container matColumnDef="tenantId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tenant</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Tenant:</span>
+        {{element.tenantId}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Database Name Column -->
+    <ng-container matColumnDef="database">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Database</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Database:</span>
+        {{element.database}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+        <button style="margin-left: 5px" mat-icon-button [matMenuTriggerFor]="contextMenu" fxHide.lt-md>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #contextMenu="matMenu">
+
+          <button mat-menu-item routerLink="/tenants/constructionKit/{{element.tenantId}}">
+            <mat-icon>view_quilt</mat-icon><span>Construction Kit</span>
+          </button>
+          <button mat-menu-item routerLink="/tenants/runtime/{{element.tenantId}}">
+            <mat-icon>query_builder</mat-icon><span>Runtime Query Builder</span>
+          </button>
+          <mat-divider></mat-divider>
+          <a mat-menu-item href="{{configurationService.config.coreServices}}tenants/{{element.tenantId}}/graphql/playground"
+             matTooltip="GraphQL Editor">
+            <mat-icon>graphic_eq</mat-icon><span>GraphQL Editor</span>
+          </a>
+          <mat-divider></mat-divider>
+          <button mat-menu-item routerLink="/tenants/notificationTemplates/{{element.tenantId}}">
+            <mat-icon>sms</mat-icon><span>Nofication Templates</span>
+          </button>
+          <button mat-menu-item routerLink="/tenants/pageTemplates/{{element.tenantId}}">
+            <mat-icon>pageview</mat-icon><span>Page Templates</span>
+          </button>
+          <button mat-menu-item routerLink="/tenants/serviceHooks/{{element.tenantId}}">
+            <mat-icon>rv_hookup</mat-icon><span>Service Hooks</span>
+          </button>
+
+          <mat-divider></mat-divider>
+
+          <button mat-menu-item (click)="onDetach(element)"><mat-icon>link_off</mat-icon><span>Detach</span></button>
+          <button mat-menu-item (click)="onDelete(element)"><mat-icon>delete</mat-icon><span>Delete</span></button>
+
+        </mat-menu>
+
+        <div fxHide.gt-sm fxLayout="row" fxLayoutAlign="center">
+
+          <button mat-button routerLink="/tenants/constructionKit/{{element.tenantId}}"
+                  matTooltip="Construction Kit">
+            <mat-icon>view_quilt</mat-icon>
+          </button>
+          <button mat-button routerLink="/tenants/runtime/{{element.tenantId}}"
+                  matTooltip="Runtime Query Builder">
+            <mat-icon>query_builder</mat-icon>
+          </button>
+
+          <mat-divider vertical="true"></mat-divider>
+
+          <a mat-button href="{{configurationService.config.coreServices}}ui/graphQL/{{element.tenantId}}"
+             matTooltip="GraphQL Editor">
+            <mat-icon>graphic_eq</mat-icon>
+          </a>
+
+          <mat-divider vertical="true"></mat-divider>
+
+          <button mat-button routerLink="/tenants/notificationTemplates/{{element.tenantId}}"
+                  matTooltip="Notification Templates">
+            <mat-icon>sms</mat-icon>
+          </button>
+          <button mat-button routerLink="/tenants/pageTemplates/{{element.tenantId}}" matTooltip="Page Templates">
+            <mat-icon>pageview</mat-icon>
+          </button>
+          <button mat-button routerLink="/tenants/serviceHooks/{{element.tenantId}}" matTooltip="Service Hooks">
+            <mat-icon>rv_hookup</mat-icon>
+          </button>
+
+          <mat-divider vertical="true"></mat-divider>
+
+          <button mat-button (click)="onDetach(element)" matTooltip="Detach"><mat-icon>link_off</mat-icon></button>
+          <button mat-button (click)="onDelete(element)" matTooltip="Delete"><mat-icon>delete</mat-icon></button>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="dataSource?.totalCount$ | async" [pageSize]="10"
+                 [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
+</div>

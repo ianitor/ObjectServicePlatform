@@ -1,0 +1,73 @@
+<div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div fxLayout="column" fxLayoutGap="10px" style="padding-top: 10px">
+
+  <div fxLayout="row" fxLayoutGap="8px">
+
+    <div fxLayout="row" fxFlex="10" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <button fxFlex mat-raised-button type="button" routerLink="new">New</button>
+    </div>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-remaining-space"></span>
+    <mat-form-field fxFlex>
+      <input matInput #input>
+      <mat-label>
+        <mat-icon>search</mat-icon>
+        Search
+      </mat-label>
+    </mat-form-field>
+  </div>
+
+  <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="wellKnownName"
+             matSortDirection="asc" matSortDisableClear>
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- WellKnownName Column -->
+    <ng-container matColumnDef="wellKnownName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Name:</span>
+        {{element.wellKnownName}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- SubjectTemplate Column -->
+    <ng-container matColumnDef="subjectTemplate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Subject Template</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Subject Template:</span>
+        {{element.subjectTemplate}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index;">
+        <button style="margin-left: 5px" mat-icon-button [matMenuTriggerFor]="contextMenu" fxHide.lt-md>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #contextMenu="matMenu">
+          <button mat-menu-item routerLink="details/{{element.rtId}}"><mat-icon>edit</mat-icon><span>Edit</span></button>
+          <button mat-menu-item (click)="onDelete(element)"><mat-icon>delete</mat-icon><span>Delete</span></button>
+        </mat-menu>
+        <div fxHide.gt-sm fxLayout="row" fxLayoutAlign="center">
+          <button mat-button fxFlex="15" routerLink="details/{{element.rtId}}" matTooltip="Edit"><mat-icon>edit</mat-icon></button>
+          <button mat-button fxFlex="15" (click)="onDelete(element)" matTooltip="Delete"><mat-icon>delete</mat-icon></button>
+        </div>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="dataSource?.totalCount$ | async" [pageSize]="10"
+                 [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
+</div>

@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Column selection</h1>
+<div mat-dialog-content>
+
+  <div fxLayout="column">
+
+    <div>
+      <div [formGroup]="ownerForm">
+        <div class="form-row">
+          <div class="form-group col">
+            <mat-form-field class="w-100">
+              <ia-entity-select [dataSource]="ckEntitySelectDataSource" placeholder="Attribute name" formControlName="attributeSelect"></ia-entity-select>
+              <mat-error *ngIf="hasError('attributeSelect', 'required')">Please enter value!</mat-error>
+              <mat-error *ngIf="hasError('attributeSelect', 'incorrect')">Please select attribute form selection list!</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-nav-list>
+      <mat-list-item *ngFor="let attributeDto of selectedAttributes">
+        <div fxLayout="row" fxFill>
+          <span fxFlex="55" fxLayoutAlign="start center">{{attributeDto.attributeName }}</span>
+
+          <button mat-icon-button fxFlex="15" (click)="remove(attributeDto)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button fxFlex="15" (click)="up(attributeDto)">
+            <mat-icon>keyboard_arrow_up</mat-icon>
+          </button>
+          <button mat-icon-button fxFlex="15"  (click)="down(attributeDto)">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+
+
+</div>
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button color="primary" [disabled]="selectedAttributes.length === 0" (click)="onOkClick()">OK</button>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+</div>

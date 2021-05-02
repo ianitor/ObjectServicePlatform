@@ -1,0 +1,25 @@
+
+.mat-column-ckId {
+  flex: 0 0 30% !important;
+  width: 10% !important;
+}
+
+.mat-column-baseType {
+  flex: 0 0 30% !important;
+  width: 10% !important;
+}
+
+.mat-column-Scope {
+  flex: 0 0 20% !important;
+  width: 10% !important;
+}
+
+.mat-column-isFinal {
+  flex: 0 0 10% !important;
+  width: 10% !important;
+}
+
+.mat-column-isAbstract {
+  flex: 0 0 10% !important;
+  width: 10% !important;
+}

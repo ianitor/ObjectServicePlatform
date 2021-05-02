@@ -1,0 +1,23 @@
+mutation createNotificationTemplate($entities: [SystemNotificationTemplateInput]!) {
+  createSystemNotificationTemplates(entities: $entities) {
+    constructionKitType {
+      attributes(attributeNames: ["type"]) {
+        items {
+          attributeName
+          attributeValueType
+          attribute{
+            selectionValues {
+              key
+              name
+            }
+          }
+        }
+      }
+    }
+    rtId
+    wellKnownName
+    type
+    subjectTemplate
+    bodyTemplate
+  }
+}

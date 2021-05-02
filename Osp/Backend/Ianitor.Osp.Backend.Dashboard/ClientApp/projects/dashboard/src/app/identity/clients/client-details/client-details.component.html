@@ -1,0 +1,153 @@
+<div class="loading-indicator" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div fxLayout="column" fxLayoutGap="12px" style="padding-top: 10px">
+  <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end">
+
+    <div fxLayout="row" fxFlex="15" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <button fxFlex mat-raised-button type="button" (click)="save()"
+              [disabled]="ownerForm.invalid">
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<form [formGroup]="ownerForm" novalidate>
+  <div class="form-row">
+    <div class="form-group col-6">
+      <mat-form-field>
+        <input matInput placeholder="ID*" type="text" formControlName="clientId">
+        <mat-error *ngIf="hasError('clientId', 'required')">Enter value!</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-6">
+      <mat-form-field>
+        <input matInput placeholder="Name*" type="text" formControlName="clientName">
+        <mat-error *ngIf="hasError('clientName', 'required')">Enter value!</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+
+    <div class="form-group col-6">
+      <mat-checkbox formControlName="isEnabled">Enabled</mat-checkbox>
+    </div>
+    <div class="form-group col-6">
+      <mat-checkbox formControlName="isOfflineAccessEnabled">Offline Access</mat-checkbox>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-6">
+      <mat-form-field>
+        <input matInput placeholder="URI" type="text" formControlName="clientUri">
+        <mat-error *ngIf="hasError('clientUri', 'required')">Enter value!</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-6">
+      <mat-form-field>
+        <input matInput placeholder="Secret" type="text" formControlName="clientSecret">
+        <mat-error *ngIf="hasError('clientSecret', 'required')">Enter value!</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+
+    <div class="form-group col-6">
+      <mat-form-field>
+        <mat-select placeholder="Allowed grant types" formControlName="allowedGrantTypes" multiple="true">
+          <mat-option *ngFor="let grantType of grantTypes" [value]="grantType.id">
+            {{grantType.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group col-6">
+      <mat-form-field>
+        <mat-select placeholder="Scopes" formControlName="allowedScopes" multiple="true">
+          <mat-option *ngFor="let scope of clientScopes" [value]="scope.id">
+            {{scope.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-6">
+      <mat-form-field>
+
+        <mat-chip-list #redirectUriList aria-label="Redirect URIs">
+          <mat-chip
+            *ngFor="let item of ownerForm.get('redirectUris').value"
+            (removed)="remove('redirectUris', item)">
+            {{item}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Redirect URIs"
+            [formControl]="redirectUriInput"
+            matChipInputAddOnBlur="true"
+            [matChipInputFor]="redirectUriList"
+            (matChipInputTokenEnd)="add(redirectUriInput, 'redirectUris')">
+        </mat-chip-list>
+        <mat-error *ngIf="redirectUriInput.hasError( 'required')">Enter value!</mat-error>
+        <mat-error *ngIf="redirectUriInput.hasError( 'pattern')">Enter valid URI (e. g. https://example.com/)!
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-6">
+      <mat-form-field>
+
+        <mat-chip-list #postLogoutRedirectUriList aria-label="Post Logout Redirect URIs">
+          <mat-chip
+            *ngFor="let item of ownerForm.get('postLogoutRedirectUris').value"
+            (removed)="remove('postLogoutRedirectUris', item)">
+            {{item}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Post Logout Redirect URIs"
+            [formControl]="postLogoutRedirectUriInput"
+            matChipInputAddOnBlur="true"
+            [matChipInputFor]="postLogoutRedirectUriList"
+            (matChipInputTokenEnd)="add(postLogoutRedirectUriInput, 'postLogoutRedirectUris')">
+        </mat-chip-list>
+        <mat-error *ngIf="postLogoutRedirectUriInput.hasError('required')">Enter value!</mat-error>
+        <mat-error *ngIf="postLogoutRedirectUriInput.hasError('pattern')">Enter valid URI (e. g.
+          https://example.com/)!
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-6">
+      <mat-form-field>
+
+        <mat-chip-list #allowedCorsOriginList aria-label="Allowed CORS Origins">
+          <mat-chip
+            *ngFor="let item of ownerForm.get('allowedCorsOrigins').value"
+            (removed)="remove('allowedCorsOrigins', item)">
+            {{item}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Allowed CORS Origins"
+            [formControl]="allowedCorsOriginsInput"
+            matChipInputAddOnBlur="true"
+            [matChipInputFor]="allowedCorsOriginList"
+            (matChipInputTokenEnd)="add(allowedCorsOriginsInput, 'allowedCorsOrigins')">
+        </mat-chip-list>
+        <mat-error *ngIf="allowedCorsOriginsInput.hasError('required')">Enter value!</mat-error>
+        <mat-error *ngIf="allowedCorsOriginsInput.hasError( 'pattern')">Enter valid URI (e. g.
+          https://example.com/)!
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,219 @@
+name: $(MajorVersion).$(MinorVersion).$(date:yyMM).$(DayOfMonth)$(rev:rrr)
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+      - release-1.0
+      - release-2.
+  
+variables:
+  buildConfiguration: 'Release'
+  buildPlatform: 'any cpu'
+  solutionFile: "Ianitor.Osp.sln"
+  Company: "SALZBURGDEV.AT"
+  Copyright: "(c) SALZBURGDEV.AT 2004-2021"
+
+stages:
+ - stage: Build
+   jobs:
+    - job: windows
+      displayName: "Windows build"
+      pool:
+        name: Gerald-Local-Windows2019
+      steps:
+      - checkout: self
+        clean: true
+        submodules: true
+      - task: NuGetToolInstaller@1
+        displayName: Install nuget
+        inputs:
+          versionSpec: '5.8.1'
+          checkLatest: true
+      - task: NuGetCommand@2
+        displayName: Restore nuget packages
+        inputs:
+          command: 'restore'
+          restoreSolution: '$(SolutionFile)'
+          feedsToUse: 'select'
+          vstsFeed: 'c2a387d3-5ad3-474e-867c-652b1725742d'
+      - template: setversion.yml
+      - task: VSBuild@1
+        displayName: Build solution Ianitor.Osp.sln
+        inputs:
+          solution: $(solutionFile)
+          platform: $(BuildPlatform)
+          configuration: $(BuildConfiguration)
+      - task: DotNetCoreCLI@2
+        displayName: dotnet publish OspTool
+        inputs:
+          command: publish
+          publishWebProjects: false
+          projects: Osp/Frontend/Ianitor.Osp.ManagementTool/*.csproj
+          arguments: --configuration $(BuildConfiguration) --self-contained true -r win10-x64
+          zipAfterPublish: false
+          modifyOutputPath: false
+      - task: DotNetCoreCLI@2
+        displayName: dotnet pack OspTool
+        inputs:
+          command: pack
+          publishWebProjects: false
+          projects: Frontend/Ianitor.Osp.ManagementTool/*.csproj
+          searchPatternPack: Osp/Frontend/Ianitor.Osp.ManagementTool/*.csproj
+          nobuild: true
+      - task: VSTest@2
+        displayName: VsTest - testAssemblies
+        inputs:
+          testAssemblyVer2: >-
+            **\$(BuildConfiguration)\*test*.dll
+            !**\obj\**
+          platform: $(BuildPlatform)
+          configuration: $(BuildConfiguration)
+          diagnosticsEnabled: True
+      - task: PublishSymbols@2
+        displayName: Publish symbols path
+        continueOnError: True
+        inputs:
+          SearchPattern: '**\bin\**\*.pdb'
+          PublishSymbols: false
+          SymbolServerType: TeamServices
+      - task: CopyFiles@2
+        displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+        inputs:
+          SourceFolder: $(system.defaultworkingdirectory)
+          Contents: >
+            bin\$(BuildConfiguration)\**        
+            Osp\Backend\Ianitor.Osp.Backend.Dashboard\ClientApp\dist\**
+          TargetFolder: $(build.artifactstagingdirectory)
+      - task: PowerShell@2
+        displayName: 'Create versioninfo file'
+        inputs:
+          targetType: 'inline'
+          script: |
+              New-Item $(build.artifactstagingdirectory)/versioninfo.txt
+              Set-Content $(build.artifactstagingdirectory)/versioninfo.txt $(Build.BuildNumber)
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: local'
+        inputs:
+          ArtifactName: local
+      - task: Npm@1
+        displayName: npm install
+        inputs:
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/
+          verbose: false
+      - task: Npm@1
+        displayName: Build shared-services
+        inputs:
+          command: custom
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/
+          verbose: false
+          customCommand: run build:shared-services -- --prod
+      - task: Npm@1
+        displayName: Build shared-auth
+        inputs:
+          command: custom
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/
+          verbose: false
+          customCommand: run build:shared-auth -- --prod
+      - task: Npm@1
+        displayName: Build shared-ui
+        inputs:
+          command: custom
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/
+          verbose: false
+          customCommand: run build:shared-ui -- --prod
+      - task: Npm@1
+        displayName: Build osp-services
+        inputs:
+          command: custom
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/
+          verbose: false
+          customCommand: run build:osp-services -- --prod
+      - task: Npm@1
+        displayName: Build osp-ui
+        inputs:
+          command: custom
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/
+          verbose: false
+          customCommand: run build:osp-ui -- --prod
+      - task: Npm@1
+        displayName: npm publish shared-services
+        inputs:
+          command: publish
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/dist/ianitor/shared-services
+          verbose: false
+          publishRegistry: useFeed
+          publishFeed: c2a387d3-5ad3-474e-867c-652b1725742d
+      - task: Npm@1
+        displayName: npm publish shared-auth
+        inputs:
+          command: publish
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/dist/ianitor/shared-auth
+          verbose: false
+          publishRegistry: useFeed
+          publishFeed: c2a387d3-5ad3-474e-867c-652b1725742d
+      - task: Npm@1
+        displayName: npm publish shared-ui
+        inputs:
+          command: publish
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/dist/ianitor/shared-ui
+          verbose: false
+          publishRegistry: useFeed
+          publishFeed: c2a387d3-5ad3-474e-867c-652b1725742d
+      - task: Npm@1
+        displayName: npm publish osp-services
+        inputs:
+          command: publish
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/dist/ianitor/osp-services
+          verbose: false
+          publishRegistry: useFeed
+          publishFeed: c2a387d3-5ad3-474e-867c-652b1725742d
+      - task: Npm@1
+        displayName: npm publish osp-ui
+        inputs:
+          command: publish
+          workingDir: Osp/Backend/Ianitor.Osp.Backend.Dashboard/ClientApp/dist/ianitor/osp-ui
+          verbose: false
+          publishRegistry: useFeed
+          publishFeed: c2a387d3-5ad3-474e-867c-652b1725742d
+      - task: NuGetCommand@2
+        displayName: NuGet push
+        inputs:
+          command: push
+          feedPublish: c2a387d3-5ad3-474e-867c-652b1725742d      
+    - job: linux
+      displayName: Docker build
+      pool:
+       name: Gerald-Local-Linux
+      steps:
+        - checkout: self
+          clean: true
+          submodules: true
+        - template: setversion.yml
+        - task: Docker@2
+          displayName: Login to production ACR
+          inputs:
+            command: login
+            containerRegistry: salzburgdev_productive
+        - template: buildAndPushDockerImage.yml
+          parameters:
+            ContainerRegistry: 'Datamodelling_Staging_Reg'
+            Repository: dashboard
+            Dockerfile: Osp/Backend/Ianitor.Osp.Backend.Dashboard/Dockerfile         
+        - template: buildAndPushDockerImage.yml
+          parameters:
+            ContainerRegistry: 'Datamodelling_Staging_Reg'
+            Repository: coreservices
+            Dockerfile: Osp/Backend/Ianitor.Osp.Backend.CoreServices/Dockerfile
+        - template: buildAndPushDockerImage.yml
+          parameters:
+            ContainerRegistry: 'Datamodelling_Staging_Reg'
+            Repository: jobservices
+            Dockerfile: Osp/Backend/Ianitor.Osp.Backend.JobServices/Dockerfile
+        - template: buildAndPushDockerImage.yml
+          parameters:
+            ContainerRegistry: 'Datamodelling_Staging_Reg'
+            Repository: identityservices
+            Dockerfile: Osp/Backend/Ianitor.Osp.Backend.Identity/Dockerfile
+

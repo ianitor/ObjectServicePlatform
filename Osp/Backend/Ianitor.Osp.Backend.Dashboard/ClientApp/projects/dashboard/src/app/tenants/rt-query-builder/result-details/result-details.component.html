@@ -1,0 +1,33 @@
+<div class="loading-indicator" *ngIf="rtQueryBuilder.dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div fxLayout="column" fxLayoutGap="10px" style="padding-top: 10px">
+
+  <div fxLayout="row" fxLayoutGap="8px">
+
+    <div fxLayout="row" fxFlex="10" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <button fxFlex mat-raised-button type="button" [disabled]="!rtQueryBuilder.query?.rtId" (click)="onExport()">Export</button>
+    </div>
+  </div>
+
+  <mat-table mat-table [dataSource]="rtQueryBuilder.dataSource" class="mat-elevation-z8" matSort
+             matSortActive="ckId"
+             matSortDirection="asc" matSortDisableClear>
+
+    <ng-container *ngFor="let column of rtQueryBuilder.dataColumns" [matColumnDef]="column">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{column}}</mat-header-cell>
+
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">{{column}}:</span>
+        <p style="word-break: break-word;">{{element.attributes[column]?.value}}</p>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="rtQueryBuilder.selectedDataColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: rtQueryBuilder.selectedDataColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="rtQueryBuilder.dataSource?.totalCount$ | async" [pageSize]="10"
+                 [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
+</div>

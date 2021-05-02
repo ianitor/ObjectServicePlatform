@@ -1,0 +1,16 @@
+query getNotificationTemplates($after: String, $first: Int, $searchFilter: SearchFilter, $sort: [Sort]) {
+  systemNotificationTemplateConnection(
+    after: $after
+    first: $first
+    searchFilter: $searchFilter
+    sortOrder: $sort
+  ) {
+    totalCount
+    items {
+      rtId
+      type
+      wellKnownName
+      subjectTemplate
+    }
+  }
+}

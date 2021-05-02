@@ -1,0 +1,28 @@
+<div fxLayout="row" fxLayoutGap="8px">
+  <app-rtQueryBuilder-query-selector [tenantId]="tenantId"
+                                     [rtQueryBuilder]="rtQueryBuilder"></app-rtQueryBuilder-query-selector>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+  <button mat-raised-button type="button" (click)="onNewQuery()">New</button>
+  <button mat-raised-button color="primary" type="button" (click)="onApply()"
+          [disabled]="!rtQueryBuilder.queryCkId || rtQueryBuilder.selectedDataColumns.length === 0">Apply
+  </button>
+</div>
+
+<mat-tab-group>
+  <mat-tab label="Results">
+    <app-rtQueryBuilder-result-details [tenantId]="tenantId"
+                                       [rtQueryBuilder]="rtQueryBuilder"></app-rtQueryBuilder-result-details>
+  </mat-tab>
+  <mat-tab label="Editor">
+    <app-rtQueryBuilder-query-details [tenantId]="tenantId"
+                                      [rtQueryBuilder]="rtQueryBuilder"></app-rtQueryBuilder-query-details>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+
+
+

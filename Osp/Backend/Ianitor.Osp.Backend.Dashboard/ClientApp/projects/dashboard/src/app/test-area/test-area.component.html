@@ -1,0 +1,42 @@
+<p>test-area works!</p>
+<div [formGroup]="ownerForm">
+  <h6 class="my-2">Allgemeines</h6>
+  <mat-card>
+    <mat-card-content>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <mat-form-field>
+            <ia-autocomplete placeholder="string*" formControlName="sender"
+                             [dataSource]="senderDataSource"></ia-autocomplete>
+            <mat-error *ngIf="hasError('sender', 'required')">Bitte einen Wert eingeben!</mat-error>
+            <mat-error *ngIf="hasError('sender', 'pattern')">Bitte einen gültigen Wert eingeben z. B. 'A-12345 Ort'!
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field>
+            <ia-entity-select placeholder="firstname*" formControlName="firstname" prefix="PaketServiceID:"
+                             [dataSource]="entityDataSource"></ia-entity-select>
+            <mat-error *ngIf="hasError('sender', 'required')">Bitte einen Wert eingeben!</mat-error>
+            <mat-error *ngIf="hasError('sender', 'pattern')">Bitte einen gültigen Wert eingeben z. B. 'A-12345 Ort'!
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          {{ownerForm.get('sender').value}}
+        </div>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button #nextButton color="primary" (click)="test()" [disabled]="ownerForm?.invalid">
+        Test
+      </button>
+      <button mat-raised-button color="primary" (click)="reset()">
+        Test
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

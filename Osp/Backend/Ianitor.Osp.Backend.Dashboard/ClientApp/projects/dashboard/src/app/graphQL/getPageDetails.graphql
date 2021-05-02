@@ -1,0 +1,11 @@
+query getPageDetails($rtId: OspObjectIdType!) {
+  systemUIPageConnection(rtId: $rtId) {
+    totalCount
+
+    items {
+      rtId
+      wellKnownName
+      content
+    }
+  }
+}

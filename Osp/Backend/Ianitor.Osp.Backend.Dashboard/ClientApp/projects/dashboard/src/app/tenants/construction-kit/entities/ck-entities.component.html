@@ -1,0 +1,94 @@
+<div class="container-fluid">
+  <div class="row mb-2 px-3">
+    <mat-toolbar class="input-filterToolbar">
+      <!-- This fills the remaining space of the current row -->
+      <span class="fill-remaining-space"></span>
+
+      <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+        <mat-form-field>
+          <input matInput #input>
+          <mat-label>
+            <mat-icon>search</mat-icon>
+            Search entities
+          </mat-label>
+        </mat-form-field>
+      </div>
+    </mat-toolbar>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort
+                 matSortActive="ckId"
+                 matSortDirection="asc" matSortDisableClear [class.isMobile]="isMobile">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- ckId Column -->
+        <ng-container matColumnDef="ckId">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Construction Kit ID</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">Construction Kit ID:</span>
+            {{element.ckId}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Base Type Column -->
+        <ng-container matColumnDef="baseType">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Base Type</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">Base Type:</span>
+            {{element.baseType?.ckId}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Scope Column -->
+        <ng-container matColumnDef="scopeId">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Scope</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">Scope:</span>
+            {{element.scopeId}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Abstract Column -->
+        <ng-container matColumnDef="isAbstract">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Abstract</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">Abstract:</span>
+            {{element.isAbstract}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Final Column -->
+        <ng-container matColumnDef="isFinal">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Final</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">Final:</span>
+            {{element.isFinal}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-button routerLink="entities/{{element.ckId}}">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <mat-paginator [length]="dataSource?.totalCount$ | async" [pageSize]="10"
+                     [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
+    </div>
+  </div>
+</div>

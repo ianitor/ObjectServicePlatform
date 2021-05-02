@@ -1,0 +1,26 @@
+query getCkEntityDetails($ckId: String) {
+  constructionKitTypes(ckId: $ckId) {
+    items {
+      baseType {
+        ckId
+      }
+      ckId
+      scopeId
+      isAbstract
+      isFinal
+      derivedTypes {
+        items {
+          ckId
+        }
+      }
+      attributes {
+        items {
+          attributeId
+          attributeName
+          isAutoCompleteEnabled
+          attributeValueType
+        }
+      }
+    }
+  }
+}

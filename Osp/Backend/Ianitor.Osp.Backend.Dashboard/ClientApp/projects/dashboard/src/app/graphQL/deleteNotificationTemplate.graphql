@@ -1,0 +1,3 @@
+mutation deleteNotificationTemplate($entities: [DeletionSystemNotificationTemplateInput]!) {
+  deleteSystemNotificationTemplates(entities: $entities)
+}

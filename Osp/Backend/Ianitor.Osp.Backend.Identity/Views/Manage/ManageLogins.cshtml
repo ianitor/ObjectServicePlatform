@@ -1,0 +1,73 @@
+﻿@model Ianitor.Osp.Backend.Identity.ViewModels.Manage.ManageLoginsViewModel
+@{
+    ViewData["Title"] = @Texts.Backend_Identity_ManageLogins_Title;
+}
+
+<div class="row justify-content-center">
+    <h1>@Texts.Backend_Identity_ManageLogins_Title</h1>
+</div>
+<div class="row justify-content-center">
+    <p>@Texts.Backend_Identity_ManageLogins_Subtitle</p>
+</div>
+<div class="row justify-content-center">
+<p class="text-success">@ViewData["StatusMessage"]</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="d-flex flex-wrap">
+
+@if (Model.CurrentLogins.Count > 0)
+{
+            @for (var index = 0; index < Model.CurrentLogins.Count; index++)
+            {
+                <form asp-controller="Manage" asp-action="RemoveLogin" method="post">
+
+                    <input asp-for="@Model.CurrentLogins[index].LoginProvider" name="LoginProvider" type="hidden"/>
+                    <input asp-for="@Model.CurrentLogins[index].ProviderKey" name="ProviderKey" type="hidden"/>
+
+                    <div class="k-card m-2">
+                        <div class="k-card-header">
+                            <h5 class="k-card-title">@Model.CurrentLogins[index].LoginProvider</h5>
+                        </div>
+                        @if ((bool)ViewData["ShowRemoveButton"])
+                        {
+                            <div class="k-card-actions k-card-actions-stretched">
+                                <button type="submit" class="k-button" value="Remove">Remove</button>
+                            </div>
+                        }
+
+                                </div>
+                            </form>
+                        }
+}
+@if (Model.OtherLogins.Count > 0)
+{
+            <form asp-controller="Manage" asp-action="LinkLogin" method="post">
+
+                @foreach (var provider in Model.OtherLogins)
+                {
+                    <div class="k-card m-2">
+                        <div class="k-card-header">
+                            <h5 class="k-card-title">@provider.DisplayName</h5>
+        </div>
+                        <div class="k-card-actions k-card-actions-stretched">
+                            <button class="k-button" type="submit" name="provider" value="@provider.DisplayName">Add</button>
+                        </div>
+                    </div>
+                }
+
+    </form>
+}
+
+    </div>
+
+    @if (!Model.CurrentLogins.Any() && !Model.OtherLogins.Any())
+    {
+        <div class="col-sm-4">
+            <div class="alert alert-info">
+                @Texts.Backend_Identity_ManageLogins_NoCurrentOrOtherLogins_Message
+            </div>
+        </div>
+    }
+
+</div>

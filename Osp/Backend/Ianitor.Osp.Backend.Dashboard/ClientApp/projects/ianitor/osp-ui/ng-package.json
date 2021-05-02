@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/ianitor/osp-ui",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "@ianitor/osp-services": "@ianitor/osp-services",
+      "@ianitor/shared-services": "@ianitor/shared-services"
+    }
+  }
+}

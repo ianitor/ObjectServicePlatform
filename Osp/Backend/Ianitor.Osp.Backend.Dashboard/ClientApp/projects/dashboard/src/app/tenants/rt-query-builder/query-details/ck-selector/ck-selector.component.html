@@ -1,0 +1,7 @@
+<div [formGroup]="ownerForm">
+  <mat-form-field>
+    <ia-entity-select [dataSource]="ckEntitySelectDataSource" placeholder="Construction Kit Type" formControlName="ckIdSelect"></ia-entity-select>
+    <mat-error *ngIf="hasError('ckIdSelect', 'required')">Please enter value!</mat-error>
+    <mat-error *ngIf="hasError('ckIdSelect', 'incorrect')">Please select value form selection list!</mat-error>
+  </mat-form-field>
+</div>

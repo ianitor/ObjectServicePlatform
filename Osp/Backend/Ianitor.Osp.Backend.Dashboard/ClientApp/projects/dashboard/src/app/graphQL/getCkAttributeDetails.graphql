@@ -1,0 +1,16 @@
+query getCkAttributeDetails($attributeId: String) {
+  constructionKitAttributes(attributeId: $attributeId) {
+    items {
+      attributeId
+
+      attributeValueType
+      scopeId
+      selectionValues {
+        key
+        name
+      }
+      defaultValues
+      defaultValue
+    }
+  }
+}

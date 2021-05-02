@@ -1,0 +1,20 @@
+@model Ianitor.Osp.Backend.Identity.ViewModels.Consent.ConsentViewModel
+
+@if (Model.IdentityScopes.Any())
+{
+    <div class="k-card m-2">
+        <div class="k-card-header">
+            <div class="k-card-title">
+                @Texts.Backend_Identity_Consent_PersonalInformation_Label
+            </div>
+        </div>
+        <div class="k-card-body">
+            <ul class="list-group list-group-flush">
+                @foreach (var scope in Model.IdentityScopes)
+                {
+                    <partial name="_ScopeListItem" model="@scope"/>
+                }
+            </ul>
+        </div>
+    </div>
+}

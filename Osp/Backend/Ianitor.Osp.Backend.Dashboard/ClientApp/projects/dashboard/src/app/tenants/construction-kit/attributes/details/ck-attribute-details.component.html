@@ -1,0 +1,88 @@
+<h2 mat-dialog-title>Details to attribute '{{attributeId}}'</h2>
+
+<div *ngIf="loading">
+  <mat-progress-bar class="w-100" mode="query"></mat-progress-bar>
+</div>
+
+<div *ngIf="ckAttributeDetailDto && ownerForm && !loading">
+  <div [formGroup]="ownerForm">
+    <div class="my-2" align="end">
+      <!--      <button mat-raised-button color="primary" class="mx-1" (click)="save()" [disabled]="ownerForm?.invalid">-->
+      <!--        Save-->
+      <!--      </button>-->
+    </div>
+
+    <mat-tab-group>
+      <mat-tab label="General">
+        <div class="m-3">
+          <mat-card class="my-2">
+            <mat-card-content>
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <mat-form-field>
+                    <input matInput placeholder="Attribute ID" type="text"
+                           formControlName="attributeId">
+                    <mat-error *ngIf="hasError('attributeId', 'required')">Value missing!</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group col-6">
+                  <mat-form-field>
+                    <mat-select placeholder="Value Type" formControlName="attributeValueType">
+                      <mat-option *ngFor="let selectValue of attributeValueTypes" [value]="selectValue.id">
+                        {{selectValue.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="hasError('attributeValueType', 'required')">Value missing!</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="form-row">
+
+                <div class="form-group col-6">
+                  <mat-form-field>
+                    <mat-select placeholder="Scope" formControlName="scopeId">
+                      <mat-option *ngFor="let selectValue of scopeSelectionValues" [value]="selectValue.id">
+                        {{selectValue.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="hasError('scopeId', 'required')">Value missing!</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="Selection Values">
+        <mat-card class="my-2">
+          <mat-card-content>
+            <div class="form-row">
+              <div class="form-group col-6">
+                <mat-nav-list>
+                  <mat-list-item *ngFor="let selectionValue of ckAttributeDetailDto.selectionValues">
+                    {{selectionValue.key}}: {{selectionValue.name}}
+                  </mat-list-item>
+                </mat-nav-list>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-tab>
+      <mat-tab label="Default">
+        <mat-card class="my-2">
+          <mat-card-content>
+            <div class="form-row">
+              <div class="form-group col-6">
+                <mat-nav-list>
+                  <mat-list-item *ngFor="let defaultValue of ckAttributeDetailDto.defaultValues">
+                    {{defaultValue.intValue}}
+                  </mat-list-item>
+                </mat-nav-list>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

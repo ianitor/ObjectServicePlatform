@@ -1,0 +1,127 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+a:hover, a:active {
+  cursor: pointer;
+}
+
+/* for sidenav to take a whole page */
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0
+}
+
+.mat-form-field {
+  width: 100%
+}
+
+.input-filterToolbar {
+  font-size: 14px;
+  line-height: 32px;
+  font-weight: 400;
+}
+
+/* Absolute Center Spinner */
+.loading-indicator {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.loading-indicator:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.mat-table {
+  overflow: auto;
+  width: 100%;
+}
+
+.mobile-label {
+  display: none;
+}
+
+.mobileCellHidden {
+  display: flex;
+}
+
+.mat-header-cell {
+  white-space: unset !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-table mat-row, .mat-table mat-header-row, .mat-table mat-footer-row {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.mat-table mat-cell:first-child, .mat-table mat-footer-cell:first-child, .mat-table mat-header-cell:first-child {
+  padding-left: 0;
+}
+
+.mat-table mat-cell:last-child, .mat-table mat-footer-cell:last-child, .mat-table mat-header-cell:last-child {
+  padding-right: 0;
+}
+
+@media (max-width: 959px) {
+
+
+  .mat-table {
+    max-height: 800px;
+  }
+
+  .mobile-label {
+    width: 140px;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .mat-footer-row::after, .mat-header-row::after, .mat-row::after {
+    min-height: 0;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
+
+  .mat-cell {
+    min-height: auto;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .mobileCellHidden {
+    display: none;
+  }
+
+}
+

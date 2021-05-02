@@ -1,0 +1,18 @@
+query getQueryDetails(
+  $rtId: OspObjectIdType!) {
+  systemQueryConnection(rtId: $rtId) {
+    totalCount
+
+    items {
+      rtId
+      name
+      queryCkId
+      columns
+      sorting
+      fieldFilter
+      attributeSearchFilter
+      textSearchFilter
+
+    }
+  }
+}

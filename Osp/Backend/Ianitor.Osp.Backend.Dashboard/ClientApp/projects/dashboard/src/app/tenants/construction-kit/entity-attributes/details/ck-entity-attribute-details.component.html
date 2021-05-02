@@ -1,0 +1,92 @@
+<h2 mat-dialog-title>Details to attribute '{{ckId}}/{{attributeName}}'</h2>
+
+<div *ngIf="loading">
+  <mat-progress-bar class="w-100" mode="query"></mat-progress-bar>
+</div>
+
+<div *ngIf="ckEntityAttributeDetailDto && ownerForm && !loading">
+  <div [formGroup]="ownerForm">
+    <div class="my-2" align="end">
+      <!--      <button mat-raised-button color="primary" class="mx-1" (click)="save()" [disabled]="ownerForm?.invalid">-->
+      <!--        Save-->
+      <!--      </button>-->
+      <button mat-raised-button color="primary" class="mx-1"
+              routerLink="../../../../attributes/{{ckEntityAttributeDetailDto.attributeId}}">
+        Attribute definition details
+      </button>
+    </div>
+
+    <mat-tab-group>
+      <mat-tab label="General">
+        <div class="m-3">
+          <mat-card class="my-2">
+            <mat-card-content>
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <mat-form-field>
+                    <input matInput placeholder="Attribute Name" type="text"
+                           formControlName="attributeName">
+                    <mat-error *ngIf="hasError('attributeName', 'required')">Value missing!</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group col-6">
+                  <mat-form-field>
+                    <input matInput placeholder="Attribute ID" type="text"
+                           formControlName="attributeId">
+                    <mat-error *ngIf="hasError('attributeId', 'required')">Value missing!</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <mat-form-field>
+                    <input matInput placeholder="Auto Increment Reference" type="text"
+                           formControlName="autoIncrementReference">
+                    <mat-error *ngIf="hasError('autoIncrementReference', 'required')">Value missing!</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="Auto complete">
+        <mat-card class="my-2">
+          <mat-card-content>
+            <div class="form-row">
+              <div class="form-group col-3">
+                <mat-checkbox formControlName="isAutoCompleteEnabled">Auto Complete enabled</mat-checkbox>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-6">
+                <mat-form-field>
+                  <input matInput placeholder="Limit" type="number"
+                         formControlName="autoCompleteLimit">
+                  <mat-error *ngIf="hasError('autoCompleteLimit', 'required')">Value missing!</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group col-6">
+                <mat-form-field>
+                  <input matInput placeholder="Filter" type="text"
+                         formControlName="autoCompleteFilter">
+                  <mat-error *ngIf="hasError('autoCompleteFilter', 'required')">Value missing!</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-6">
+                <mat-nav-list>
+                  <mat-list-item *ngFor="let autoCompleteText of ckEntityAttributeDetailDto.autoCompleteTexts">
+                    {{autoCompleteText}}
+                  </mat-list-item>
+                </mat-nav-list>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

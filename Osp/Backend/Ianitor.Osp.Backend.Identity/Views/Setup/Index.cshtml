@@ -1,0 +1,61 @@
+@model Ianitor.Osp.Backend.Identity.ViewModels.Setup.SetupViewModel
+@{
+    ViewData["Title"] = Texts.Backend_Identity_Setup_Title;
+}
+
+<div class="row justify-content-center">
+    <h1>@Texts.Backend_Identity_Setup_Title</h1>
+</div>
+<div class="row justify-content-center">
+    <p>@Texts.Backend_Identity_Setup_Subtitle</p>
+</div>
+
+
+<partial name="_ValidationSummary"/>
+
+<div class="row justify-content-center">
+
+    <div class="col-sm-4">
+        <form asp-route="Login">
+
+            <div class="k-card">
+
+                <div class="k-card-body">
+
+
+                    <fieldset>
+                        <div class="form-group">
+                            <kendo-textbox name="EMailAddress">
+                                <textbox-label content="@Texts.Backend_Identity_Login_Email_Label" floating="true"/>
+                            </kendo-textbox>
+                            <span asp-validation-for="EMailAddress" class="sg-validation-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <kendo-textbox name="NewPassword" type="password" autocomplete="off">
+                                <textbox-label content="@Texts.Backend_Identity_NewPassword_Label" floating="true"/>
+                            </kendo-textbox>
+                            <span asp-validation-for="NewPassword" class="sg-validation-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <kendo-textbox name="ConfirmPassword" type="password" autocomplete="off">
+                                <textbox-label content="@Texts.Backend_Identity_ConfirmNewPassword_Label" floating="true"/>
+                            </kendo-textbox>
+                            <span asp-validation-for="ConfirmPassword" class="sg-validation-error"></span>
+                        </div>
+                    </fieldset>
+
+
+                </div>
+                <div class="k-card-actions k-card-actions-stretched">
+
+                    <kendo-button name="button" type="submit"
+                                  class="k-primary" value="login">
+                        @Texts.Backend_Identity_Setup_Create_Button
+                    </kendo-button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

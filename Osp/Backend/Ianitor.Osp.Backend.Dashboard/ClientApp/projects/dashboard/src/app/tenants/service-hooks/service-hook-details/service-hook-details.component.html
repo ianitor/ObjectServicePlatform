@@ -1,0 +1,47 @@
+<div class="loading-indicator" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+<div fxLayout="column" fxLayoutGap="12px" style="padding-top: 10px">
+  <div fxLayout="row" fxLayoutGap="8px">
+    <app-rtQueryBuilder-ck-selector fxFlex="50" [tenantId]="tenantId"
+                                    [ckFieldSelectBuilder]="fieldFilterBuilder"></app-rtQueryBuilder-ck-selector>
+
+    <div fxFlex="35"></div>
+
+    <div fxLayout="row" fxFlex="15" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <button fxFlex mat-raised-button type="button" (click)="onSave()"
+              [disabled]="!fieldFilterBuilder?.queryCkId || ownerForm.invalid">
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="ownerForm">
+
+  <mat-checkbox formControlName="enabled">Enabled</mat-checkbox>
+
+  <mat-form-field>
+    <input matInput placeholder="Name" type="text"
+           formControlName="name">
+    <mat-error *ngIf="hasError('name', 'required')">Enter value!</mat-error>
+  </mat-form-field>
+
+  <div fxLayout="row" fxLayoutGap="8px">
+    <mat-form-field>
+      <input matInput placeholder="Base URI" type="text"
+             formControlName="serviceHookBaseUri">
+      <mat-error *ngIf="hasError('serviceHookBaseUri', 'required')">Enter value!</mat-error>
+      <mat-error *ngIf="hasError('serviceHookBaseUri', 'pattern')">Enter valid URI (e. g. https://example.com/)!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Action" type="text"
+             formControlName="serviceHookAction">
+      <mat-error *ngIf="hasError('serviceHookAction', 'required')">Enter value!</mat-error>
+    </mat-form-field>
+  </div>
+</form>
+
+<app-rtQueryBuilder-field-filter-editor
+  [fieldFilterBuilder]="fieldFilterBuilder"></app-rtQueryBuilder-field-filter-editor>

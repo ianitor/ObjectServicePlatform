@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "downlevelIteration": true,
+    "module": "esnext",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "paths": {
+      "@ianitor/shared-ui": [
+        "dist/ianitor/shared-ui"
+      ],
+      "@ianitor/shared-auth": [
+        "dist/ianitor/shared-auth"
+      ],
+      "@ianitor/shared-services": [
+        "dist/ianitor/shared-services",
+      ],
+      "@ianitor/osp-ui": [
+        "dist/ianitor/osp-ui"
+      ],
+      "@ianitor/osp-services": [
+        "dist/ianitor/osp-services"
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html>
+<partial name="_LayoutHead"/>
+
+<body>
+<div class="container-fluid">
+    <main role="main" class="m-2">
+        @RenderBody()
+    </main>
+</div>
+<partial name="_LayoutFooter"/>
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

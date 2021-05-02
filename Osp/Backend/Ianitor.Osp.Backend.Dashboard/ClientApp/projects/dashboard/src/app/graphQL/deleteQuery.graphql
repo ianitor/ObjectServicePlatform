@@ -1,0 +1,3 @@
+mutation deleteQuery($entities: [DeletionSystemQueryInput]!) {
+  deleteSystemQuerys(entities: $entities)
+}

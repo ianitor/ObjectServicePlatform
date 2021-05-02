@@ -1,0 +1,22 @@
+<ul class="navbar-nav" *ngIf="isAuthenticated | async">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ userName | async }} <b class="caret"></b>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <!--<a class="dropdown-item" asp-action="Index" asp-area="Authentication" asp-controller="Grants">Client Application Access</a>-->
+      <!--<a class="dropdown-item" [routerLink]='["/authentication/profile"]' title="Manage">Manage</a>-->
+      <!--<a class="dropdown-item" asp-action="Index" asp-area="Authentication" asp-controller="Diagnostics">Diagnostics</a>-->
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" routerLink="" (click)='logout()' title="Logout">Logout</a>
+    </div>
+  </li>
+</ul>
+<ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">
+  <li class="nav-item">
+        <a class="nav-link" routerLink="" (click)='register()'>Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="" (click)='login()'>Login</a>
+    </li>
+</ul>

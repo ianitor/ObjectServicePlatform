@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>{{data.message}}</div>
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button color="primary" (click)="onButton1()">{{button1Text}}</button>
+  <button mat-button (click)="onButton2()" *ngIf="button2Text" >{{button2Text}}</button>
+  <button mat-button (click)="onButton3()" *ngIf="button3Text" >{{button3Text}}</button>
+</div>

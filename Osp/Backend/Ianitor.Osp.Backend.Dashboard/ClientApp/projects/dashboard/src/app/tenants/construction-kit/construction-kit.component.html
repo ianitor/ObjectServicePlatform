@@ -1,0 +1,32 @@
+<div class="container-fluid">
+<!--  <div class="row mb-2">-->
+<!--    <mat-toolbar class="input-filterToolbar">-->
+<!--      &lt;!&ndash;      <button mat-raised-button color="primary" type="button" routerLink="/customers/new">Neu</button>&ndash;&gt;-->
+
+<!--      &lt;!&ndash; This fills the remaining space of the current row &ndash;&gt;-->
+<!--      <span class="fill-remaining-space"></span>-->
+
+<!--    </mat-toolbar>-->
+<!--  </div>-->
+  <div class="row">
+    <div class="col-12">
+      <div class="loading-indicator" *ngIf="dataSource.loading$ | async">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <mat-tab-group>
+        <mat-tab label="Entities">
+          <div class="m-3">
+            <app-ck-entities [tenantId]="tenantId"></app-ck-entities>
+          </div>
+        </mat-tab>
+        <mat-tab label="Attributes">
+          <div class="m-3">
+            <app-ck-attributes [tenantId]="tenantId"></app-ck-attributes>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+
+</div>

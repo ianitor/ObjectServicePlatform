@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssemblyName>Ianitor.Osp.Backend.JobServices</AssemblyName>
+        <RootNamespace>Ianitor.Osp.Backend.JobServices</RootNamespace>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <Authors>Ianitor.Osp.Backend.JobServices</Authors>
+        <Version>1.0.0</Version>
+        <Description>The job services of Object Service Platform</Description>
+        <OutputType>Exe</OutputType>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\..\Common\osp.snk</AssemblyOriginatorKeyFile>
+        <IsPackable>false</IsPackable>
+        <UserSecretsId>FC21694E-6810-46DB-9352-465BD6075EF3</UserSecretsId>
+        <ApplicationIcon />
+        <StartupObject />
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <OutputPath>..\..\..\bin\Debug\JobServices</OutputPath>
+        <DocumentationFile>..\..\..\bin\Debug\JobServices\Ianitor.Osp.Backend.JobServices.xml</DocumentationFile>
+        <NoWarn>1701;1702;CS8002</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <OutputPath>..\..\..\bin\Release\JobServices</OutputPath>
+        <DocumentationFile>..\..\..\bin\Release\JobServices\Ianitor.Osp.Backend.JobServices.xml</DocumentationFile>
+        <NoWarn>1701;1702;CS8002</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\Common\osp.snk">
+            <Link>osp.snk</Link>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Hangfire.Mongo" Version="0.7.20" />
+        <PackageReference Include="Ianitor.Common.Shared" Version="3.0.2005.4001" />
+        <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.14" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.2.1" />
+        <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+        <PackageReference Include="NLog.Web.AspNetCore" Version="4.10.0" />
+        <PackageReference Include="RestSharp" Version="106.11.7" />
+        <PackageReference Include="Hangfire.AspNetCore" Version="1.7.22" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Common\Ianitor.Osp.Common.Internationalization\Ianitor.Osp.Common.Internationalization.csproj" />
+        <ProjectReference Include="..\..\Common\Ianitor.Osp.Common.Shared\Ianitor.Osp.Common.Shared.csproj" />
+        <ProjectReference Include="..\Ianitor.Osp.Backend.Common\Ianitor.Osp.Backend.Common.csproj" />
+        <ProjectReference Include="..\Ianitor.Osp.Backend.Jobs\Ianitor.Osp.Backend.Jobs.csproj" />
+        <ProjectReference Include="..\Ianitor.Osp.Backend.Persistence\Ianitor.Osp.Backend.Persistence.csproj" />
+        <ProjectReference Include="..\Ianitor.Osp.Backend.Swagger\Ianitor.Osp.Backend.Swagger.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="wwwroot\css\swagger.css">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+    </ItemGroup>
+
+</Project>

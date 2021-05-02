@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\..\Common\osp.snk</AssemblyOriginatorKeyFile>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <OutputPath>..\..\..\bin\Debug\BackendCommon</OutputPath>
+        <DocumentationFile>..\..\..\bin\Debug\BackendCommon\Ianitor.Osp.Backend.Common.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <OutputPath>..\..\..\bin\Release\BackendCommon</OutputPath>
+        <DocumentationFile>..\..\..\bin\Release\BackendCommon\Ianitor.Osp.Backend.Common.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\Common\osp.snk" Link="osp.snk" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="IdentityModel" Version="5.1.0" />
+      <PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Cors" Version="2.2.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="NLog" Version="4.7.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.Extensions.Options">
+        <HintPath>C:\Users\GeraldLochner\.nuget\packages\microsoft.extensions.options\2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Ianitor.Osp.Backend.DistributedCache\Ianitor.Osp.Backend.DistributedCache.csproj" />
+      <ProjectReference Include="..\Ianitor.Osp.Backend.Persistence\Ianitor.Osp.Backend.Persistence.csproj" />
+    </ItemGroup>
+
+</Project>

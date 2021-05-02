@@ -1,0 +1,17 @@
+<mat-card class="m-2">
+  <mat-card-header class="m-2">
+    <mat-card-title class="font-weight-bold">Welcome to Object Service Platform Dashboard!</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p *ngIf="(isAuthenticated | async)">
+      Hello, {{ userName | async }}!
+    </p>
+    <p *ngIf="!(isAuthenticated | async)">
+      You are not logged in, please log in for further actions.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" *ngIf="!(isAuthenticated | async)" (click)="login()">Login</button>
+    <button mat-raised-button color="primary" *ngIf="(isAuthenticated | async)" (click)="logout()">Logout</button>
+  </mat-card-actions>
+</mat-card>

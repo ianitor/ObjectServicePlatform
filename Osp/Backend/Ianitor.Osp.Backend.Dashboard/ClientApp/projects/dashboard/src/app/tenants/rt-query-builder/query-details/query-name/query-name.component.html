@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Save query as</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <div [formGroup]="formGroup">
+      <div class="form-row">
+        <div class="form-group col">
+          <mat-form-field class="w-100">
+            <input matInput placeholder="Name" formControlName='name'>
+            <mat-error *ngIf="hasError('name', 'required')">Value missing!</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button color="primary" [disabled]="formGroup.invalid" (click)="onOkClick()">OK</button>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+</div>

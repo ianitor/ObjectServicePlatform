@@ -1,0 +1,71 @@
+<div class="loading-indicator" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="apiError"
+     class="alert alert-danger">
+
+  <ul type="disc">
+    <li *ngFor="let detail of apiError.details">{{detail.description}}</li>
+  </ul>
+
+</div>
+
+<div *ngIf="isLoaded">
+
+  <div fxLayout="column" fxLayoutGap="12px" style="padding-top: 10px">
+    <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end">
+
+      <div fxLayout="row" fxFlex="15" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <button fxFlex mat-raised-button type="button" (click)="save()"
+                [disabled]="ownerForm.invalid">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <form [formGroup]="ownerForm" novalidate>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <mat-form-field>
+          <input matInput placeholder="E-Mail" type="text" formControlName="email">
+          <mat-error *ngIf="hasError('email', 'required')">Enter value!</mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">Please enter a valid E-Mail address (e. g.
+            demo@test.com)!
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-6">
+        <mat-form-field>
+          <input matInput placeholder="User name" type="text" formControlName="name">
+          <mat-error *ngIf="hasError('name', 'required')">Enter value!</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <mat-form-field>
+          <ia-entity-select formControlName="roles" placeholder="Role"
+                            [dataSource]="rolesDataSource"></ia-entity-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <mat-form-field>
+          <input matInput placeholder="First name" type="text" formControlName="firstName">
+          <mat-error *ngIf="hasError('firstName', 'required')">Enter value!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-6">
+        <mat-form-field>
+          <input matInput placeholder="Last name" type="text" formControlName="lastName">
+          <mat-error *ngIf="hasError('lastName', 'required')">Enter value!</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+  </form>
+</div>

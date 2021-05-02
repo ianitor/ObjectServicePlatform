@@ -1,0 +1,7 @@
+mutation updatePage($entities: [UpdateSystemUIPageInput]!) {
+  updateSystemUIPages(entities: $entities) {
+    rtId
+    wellKnownName
+    content
+  }
+}

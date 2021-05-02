@@ -1,0 +1,15 @@
+/.idea
+.dockerignore
+.env
+/.git
+.gitignore
+/.vs
+/.vscode
+/bin
+/logFiles
+*/Logfiles
+*/bin
+*/obj
+**/.toolstarget
+**/node_modules
+/packages

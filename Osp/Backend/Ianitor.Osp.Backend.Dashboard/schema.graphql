@@ -1,0 +1,1823 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: OspQuery
+    mutation: OspMutation
+    subscription: OspSubscriptions
+}
+
+"Construction kit attribute definitions"
+type CkAttribute {
+    "Unique id of the object."
+    attributeId: ID
+    attributeValueType: AttributeValueType
+    "Default value of a scalar attribute."
+    defaultValue: SimpleScalarType
+    "Default values of a compound attribute."
+    defaultValues: [SimpleScalarType]
+    scopeId: Scopes
+    "Selection values for the attribute."
+    selectionValues: [CkSelectionValue]
+}
+
+"A connection from an object to a list of objects of type `CkAttributeDto`."
+type CkAttributeDtoConnection {
+    "A list of all of the edges returned in the connection."
+    edges: [CkAttributeDtoEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [CkAttribute]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `CkAttributeDto`."
+type CkAttributeDtoEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: CkAttribute
+}
+
+"A construction kit type"
+type CkEntity {
+    attributes(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filter of attribute names"
+        attributeNames: [String],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int
+    ): CkEntityAttributeDtoConnection
+    baseType: CkEntity
+    "Unique id of the object."
+    ckId: ID
+    derivedTypes(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int
+    ): CkEntityDtoConnection
+    isAbstract: Boolean!
+    isFinal: Boolean!
+    scopeId: Scopes
+    typeName: String!
+}
+
+"Attributes of a construction kit entity"
+type CkEntityAttribute {
+    "The construction kit attribute definition"
+    attribute: CkAttribute
+    "OSP Identifier of the attribute."
+    attributeId: ID
+    "Attribute name within the entity."
+    attributeName: String
+    "Attribute name within the entity."
+    attributeValueType: AttributeValueType
+    "Auto complete filter value for the attribute."
+    autoCompleteFilter: String
+    "Auto complete max value count for the attribute."
+    autoCompleteLimit: Int
+    "Auto complete values for the attribute."
+    autoCompleteTexts: [String]
+    "Auto increment reference for the attribute."
+    autoIncrementReference: String
+    "Returns true, when auto complete values are enabled."
+    isAutoCompleteEnabled: Boolean
+}
+
+"A connection from an object to a list of objects of type `CkEntityAttributeDto`."
+type CkEntityAttributeDtoConnection {
+    "A list of all of the edges returned in the connection."
+    edges: [CkEntityAttributeDtoEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [CkEntityAttribute]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `CkEntityAttributeDto`."
+type CkEntityAttributeDtoEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: CkEntityAttribute
+}
+
+"A connection from an object to a list of objects of type `CkEntityDto`."
+type CkEntityDtoConnection {
+    "A list of all of the edges returned in the connection."
+    edges: [CkEntityDtoEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [CkEntity]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `CkEntityDto`."
+type CkEntityDtoEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: CkEntity
+}
+
+"a person or company"
+type CkSelectionValue {
+    "AssociationId of the selection list value"
+    key: Int
+    "Name of the selection list value"
+    name: String
+}
+
+type OspMutation {
+    "Creates new entities of type 'PaketServiceAccountingItem'."
+    createPaketServiceAccountingItems(entities: [PaketServiceAccountingItemInput]!): [PaketServiceAccountingItem]
+    "Creates new entities of type 'PaketServiceAccountingRule'."
+    createPaketServiceAccountingRules(entities: [PaketServiceAccountingRuleInput]!): [PaketServiceAccountingRule]
+    "Creates new entities of type 'PaketServiceContact'."
+    createPaketServiceContacts(entities: [PaketServiceContactInput]!): [PaketServiceContact]
+    "Creates new entities of type 'PaketServiceParcelShipment'."
+    createPaketServiceParcelShipments(entities: [PaketServiceParcelShipmentInput]!): [PaketServiceParcelShipment]
+    "Creates new entities of type 'SystemAutoIncrement'."
+    createSystemAutoIncrements(entities: [SystemAutoIncrementInput]!): [SystemAutoIncrement]
+    "Creates new entities of type 'SystemNotificationMessage'."
+    createSystemNotificationMessages(entities: [SystemNotificationMessageInput]!): [SystemNotificationMessage]
+    "Creates new entities of type 'SystemNotificationTemplate'."
+    createSystemNotificationTemplates(entities: [SystemNotificationTemplateInput]!): [SystemNotificationTemplate]
+    "Creates new entities of type 'SystemQuery'."
+    createSystemQuerys(entities: [SystemQueryInput]!): [SystemQuery]
+    "Creates new entities of type 'SystemServiceHook'."
+    createSystemServiceHooks(entities: [SystemServiceHookInput]!): [SystemServiceHook]
+    "Creates new entities of type 'SystemUIPage'."
+    createSystemUIPages(entities: [SystemUIPageInput]!): [SystemUIPage]
+    "Deletes an entity of type 'PaketServiceAccountingItem'."
+    deletePaketServiceAccountingItems(entities: [DeletionPaketServiceAccountingItemInput]!): Boolean
+    "Deletes an entity of type 'PaketServiceAccountingRule'."
+    deletePaketServiceAccountingRules(entities: [DeletionPaketServiceAccountingRuleInput]!): Boolean
+    "Deletes an entity of type 'PaketServiceContact'."
+    deletePaketServiceContacts(entities: [DeletionPaketServiceContactInput]!): Boolean
+    "Deletes an entity of type 'PaketServiceParcelShipment'."
+    deletePaketServiceParcelShipments(entities: [DeletionPaketServiceParcelShipmentInput]!): Boolean
+    "Deletes an entity of type 'SystemAutoIncrement'."
+    deleteSystemAutoIncrements(entities: [DeletionSystemAutoIncrementInput]!): Boolean
+    "Deletes an entity of type 'SystemNotificationMessage'."
+    deleteSystemNotificationMessages(entities: [DeletionSystemNotificationMessageInput]!): Boolean
+    "Deletes an entity of type 'SystemNotificationTemplate'."
+    deleteSystemNotificationTemplates(entities: [DeletionSystemNotificationTemplateInput]!): Boolean
+    "Deletes an entity of type 'SystemQuery'."
+    deleteSystemQuerys(entities: [DeletionSystemQueryInput]!): Boolean
+    "Deletes an entity of type 'SystemServiceHook'."
+    deleteSystemServiceHooks(entities: [DeletionSystemServiceHookInput]!): Boolean
+    "Deletes an entity of type 'SystemUIPage'."
+    deleteSystemUIPages(entities: [DeletionSystemUIPageInput]!): Boolean
+    "Updates existing entity of type 'PaketServiceAccountingItem'."
+    updatePaketServiceAccountingItems(entities: [UpdatePaketServiceAccountingItemInput]!): [PaketServiceAccountingItem]
+    "Updates existing entity of type 'PaketServiceAccountingRule'."
+    updatePaketServiceAccountingRules(entities: [UpdatePaketServiceAccountingRuleInput]!): [PaketServiceAccountingRule]
+    "Updates existing entity of type 'PaketServiceContact'."
+    updatePaketServiceContacts(entities: [UpdatePaketServiceContactInput]!): [PaketServiceContact]
+    "Updates existing entity of type 'PaketServiceParcelShipment'."
+    updatePaketServiceParcelShipments(entities: [UpdatePaketServiceParcelShipmentInput]!): [PaketServiceParcelShipment]
+    "Updates existing entity of type 'SystemAutoIncrement'."
+    updateSystemAutoIncrements(entities: [UpdateSystemAutoIncrementInput]!): [SystemAutoIncrement]
+    "Updates existing entity of type 'SystemNotificationMessage'."
+    updateSystemNotificationMessages(entities: [UpdateSystemNotificationMessageInput]!): [SystemNotificationMessage]
+    "Updates existing entity of type 'SystemNotificationTemplate'."
+    updateSystemNotificationTemplates(entities: [UpdateSystemNotificationTemplateInput]!): [SystemNotificationTemplate]
+    "Updates existing entity of type 'SystemQuery'."
+    updateSystemQuerys(entities: [UpdateSystemQueryInput]!): [SystemQuery]
+    "Updates existing entity of type 'SystemServiceHook'."
+    updateSystemServiceHooks(entities: [UpdateSystemServiceHookInput]!): [SystemServiceHook]
+    "Updates existing entity of type 'SystemUIPage'."
+    updateSystemUIPages(entities: [UpdateSystemUIPageInput]!): [SystemUIPage]
+}
+
+type OspQuery {
+    constructionKitAttributes(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Returns the entity with the given attribute id."
+        attributeId: String,
+        "Returns entities with the given attribute ids."
+        attributeIds: [String],
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): CkAttributeDtoConnection
+    constructionKitTypes(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Returns the construction kit type with the given id."
+        ckId: String,
+        "Returns the construction kit types with the given ids."
+        ckIds: [String],
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): CkEntityDtoConnection
+    paketServiceAccountingItemConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceAccountingItemConnection
+    paketServiceAccountingRuleConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceAccountingRuleConnection
+    paketServiceContactConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceContactConnection
+    paketServiceParcelShipmentConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceParcelShipmentConnection
+    runtimeEntities(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "The construction kit type with the given id."
+        ckId: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): RtEntityGenericDtoConnection
+    systemAutoIncrementConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemAutoIncrementConnection
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+    systemNotificationTemplateConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationTemplateConnection
+    systemQueryConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemQueryConnection
+    systemServiceHookConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemServiceHookConnection
+    systemUIPageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemUIPageConnection
+}
+
+type OspSubscriptions {
+    paketServiceAccountingItemEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): PaketServiceAccountingItemUpdateMessage
+    paketServiceAccountingRuleEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): PaketServiceAccountingRuleUpdateMessage
+    paketServiceContactEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): PaketServiceContactUpdateMessage
+    paketServiceParcelShipmentEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): PaketServiceParcelShipmentUpdateMessage
+    systemAutoIncrementEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): SystemAutoIncrementUpdateMessage
+    systemNotificationMessageEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): SystemNotificationMessageUpdateMessage
+    systemNotificationTemplateEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): SystemNotificationTemplateUpdateMessage
+    systemQueryEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): SystemQueryUpdateMessage
+    systemServiceHookEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): SystemServiceHookUpdateMessage
+    systemUIPageEvents(rtId: OspObjectIdType, updateTypes: [UpdateType]!): SystemUIPageUpdateMessage
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+    "When paginating forwards, the cursor to continue."
+    endCursor: String
+    "When paginating forwards, are there more items?"
+    hasNextPage: Boolean!
+    "When paginating backwards, are there more items?"
+    hasPreviousPage: Boolean!
+    "When paginating backwards, the cursor to continue."
+    startCursor: String
+}
+
+"Runtime entities of construction kit type 'PaketService.Accounting.Item'"
+type PaketServiceAccountingItem {
+    amount: Int
+    billed: PaketServiceAccountingItem_BilledUnion
+    chargeType: Int
+    constructionKitType: CkEntity
+    createdDateTime: DateTime
+    description: String
+    metaData: String
+    price: Decimal
+    relatesFrom: PaketServiceAccountingItem_RelatesFromUnion
+    rtId: OspObjectIdType
+    wellKnownName: String
+}
+
+"A connection to `PaketServiceAccountingItem`."
+type PaketServiceAccountingItemConnection {
+    "Information to aid in pagination."
+    edges: [PaketServiceAccountingItemEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [PaketServiceAccountingItem]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `PaketServiceAccountingItem`."
+type PaketServiceAccountingItemEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: PaketServiceAccountingItem
+}
+
+type PaketServiceAccountingItemUpdate {
+    "The corresponding item"
+    item: PaketServiceAccountingItem
+    updateState: UpdateType
+}
+
+type PaketServiceAccountingItemUpdateMessage {
+    "The corresponding items"
+    items: [PaketServiceAccountingItemUpdate]
+}
+
+"Association PaketService.Billings (Inbound) of entity type PaketServiceAccountingItem"
+type PaketServiceAccountingItem_BilledUnion {
+    paketServiceContactConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceContactConnection
+    paketServiceParcelShipmentConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceParcelShipmentConnection
+}
+
+"Association System.Related (Outbound) of entity type PaketServiceAccountingItem"
+type PaketServiceAccountingItem_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"Runtime entities of construction kit type 'PaketService.Accounting.Rule'"
+type PaketServiceAccountingRule {
+    comment: String
+    constructionKitType: CkEntity
+    enabled: Boolean
+    price: Decimal
+    relatesFrom: PaketServiceAccountingRule_RelatesFromUnion
+    rtId: OspObjectIdType
+    type: Int
+    validFrom: DateTime
+    wellKnownName: String
+}
+
+"A connection to `PaketServiceAccountingRule`."
+type PaketServiceAccountingRuleConnection {
+    "Information to aid in pagination."
+    edges: [PaketServiceAccountingRuleEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [PaketServiceAccountingRule]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `PaketServiceAccountingRule`."
+type PaketServiceAccountingRuleEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: PaketServiceAccountingRule
+}
+
+type PaketServiceAccountingRuleUpdate {
+    "The corresponding item"
+    item: PaketServiceAccountingRule
+    updateState: UpdateType
+}
+
+type PaketServiceAccountingRuleUpdateMessage {
+    "The corresponding items"
+    items: [PaketServiceAccountingRuleUpdate]
+}
+
+"Association System.Related (Outbound) of entity type PaketServiceAccountingRule"
+type PaketServiceAccountingRule_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"Runtime entities of construction kit type 'PaketService.Contact'"
+type PaketServiceContact {
+    accountingType: Int
+    additionalLine: String
+    allowsNewsLetter: Boolean
+    billings: PaketServiceContact_BillingsUnion
+    breachOfLaw: String
+    children: PaketServiceContact_ChildrenUnion
+    city: String
+    comment: String
+    companyName: String
+    constructionKitType: CkEntity
+    country: String
+    creationDateTime: DateTime
+    dateOfBirth: DateTime
+    district: String
+    eMailAddress: String
+    firstName: String
+    freeParcelShipmentCount: Int
+    identificationType: String
+    lastName: String
+    memberName: String
+    memorandum: String
+    notificationType: Int
+    paysAttentionBy: String
+    phoneNumberFax: String
+    phoneNumberLandLine: String
+    phoneNumberMobile: String
+    postalCode: Int
+    relatesFrom: PaketServiceContact_RelatesFromUnion
+    rtId: OspObjectIdType
+    salutation: String
+    serviceNumber: String
+    street: String
+    subscriptionType: Int
+    title: String
+    wellKnownName: String
+}
+
+"A connection to `PaketServiceContact`."
+type PaketServiceContactConnection {
+    "Information to aid in pagination."
+    edges: [PaketServiceContactEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [PaketServiceContact]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `PaketServiceContact`."
+type PaketServiceContactEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: PaketServiceContact
+}
+
+type PaketServiceContactUpdate {
+    "The corresponding item"
+    item: PaketServiceContact
+    updateState: UpdateType
+}
+
+type PaketServiceContactUpdateMessage {
+    "The corresponding items"
+    items: [PaketServiceContactUpdate]
+}
+
+"Association PaketService.Billings (Outbound) of entity type PaketServiceContact"
+type PaketServiceContact_BillingsUnion {
+    paketServiceAccountingItemConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceAccountingItemConnection
+}
+
+"Association System.ParentChild (Outbound) of entity type PaketServiceContact"
+type PaketServiceContact_ChildrenUnion {
+    paketServiceParcelShipmentConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceParcelShipmentConnection
+}
+
+"Association System.Related (Outbound) of entity type PaketServiceContact"
+type PaketServiceContact_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"Runtime entities of construction kit type 'PaketService.ParcelShipment'"
+type PaketServiceParcelShipment {
+    addressResolveFee: Boolean
+    availableDateTime: DateTime
+    billings: PaketServiceParcelShipment_BillingsUnion
+    cashExpenseService: Boolean
+    cashExpenseSumAdvanced: Decimal
+    comment: String
+    constructionKitType: CkEntity
+    creationDateTime: DateTime
+    deliveryDateTime: DateTime
+    deliveryLocation: Int
+    deliveryService: String
+    fetchDateTime: DateTime
+    fetchedBy: String
+    identificationNumber: String
+    internalId: Int
+    lastNotificationSent: DateTime
+    lastTryNotificationSent: DateTime
+    mailingType: Int
+    notificationAcknowledged: Boolean
+    parent: PaketServiceParcelShipment_ParentUnion
+    relatesFrom: PaketServiceParcelShipment_RelatesFromUnion
+    returnShipmentType: Int
+    rtId: OspObjectIdType
+    sender: String
+    state: Int
+    storageLocation: String
+    unitCount: Int
+    weight: Decimal
+    wellKnownName: String
+}
+
+"A connection to `PaketServiceParcelShipment`."
+type PaketServiceParcelShipmentConnection {
+    "Information to aid in pagination."
+    edges: [PaketServiceParcelShipmentEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [PaketServiceParcelShipment]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `PaketServiceParcelShipment`."
+type PaketServiceParcelShipmentEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: PaketServiceParcelShipment
+}
+
+type PaketServiceParcelShipmentUpdate {
+    "The corresponding item"
+    item: PaketServiceParcelShipment
+    updateState: UpdateType
+}
+
+type PaketServiceParcelShipmentUpdateMessage {
+    "The corresponding items"
+    items: [PaketServiceParcelShipmentUpdate]
+}
+
+"Association PaketService.Billings (Outbound) of entity type PaketServiceParcelShipment"
+type PaketServiceParcelShipment_BillingsUnion {
+    paketServiceAccountingItemConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceAccountingItemConnection
+}
+
+"Association System.ParentChild (Inbound) of entity type PaketServiceParcelShipment"
+type PaketServiceParcelShipment_ParentUnion {
+    paketServiceContactConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceContactConnection
+}
+
+"Association System.Related (Outbound) of entity type PaketServiceParcelShipment"
+type PaketServiceParcelShipment_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"A runtime entity type of OSP"
+type RtEntity {
+    attributes(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filter of attribute names"
+        attributeNames: [String],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int
+    ): RtEntityAttributeDtoConnection
+    rtId: OspObjectIdType
+    wellKnownName: String
+}
+
+"Attribute of a runtime entity"
+type RtEntityAttribute {
+    "Attribute name within the entity."
+    attributeName: String
+    "Value of a scalar attribute."
+    value: SimpleScalarType
+    "Values of a compound attribute."
+    values: [SimpleScalarType]
+}
+
+"A connection from an object to a list of objects of type `RtEntityAttributeDto`."
+type RtEntityAttributeDtoConnection {
+    "A list of all of the edges returned in the connection."
+    edges: [RtEntityAttributeDtoEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [RtEntityAttribute]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `RtEntityAttributeDto`."
+type RtEntityAttributeDtoEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: RtEntityAttribute
+}
+
+"A connection from an object to a list of objects of type `RtEntityGenericDto`."
+type RtEntityGenericDtoConnection {
+    "A list of all of the edges returned in the connection."
+    edges: [RtEntityGenericDtoEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [RtEntity]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `RtEntityGenericDto`."
+type RtEntityGenericDtoEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: RtEntity
+}
+
+"Runtime entities of construction kit type 'System.AutoIncrement'"
+type SystemAutoIncrement {
+    constructionKitType: CkEntity
+    currentValue: Int
+    end: Int
+    relatesFrom: SystemAutoIncrement_RelatesFromUnion
+    rtId: OspObjectIdType
+    start: Int
+    wellKnownName: String
+}
+
+"A connection to `SystemAutoIncrement`."
+type SystemAutoIncrementConnection {
+    "Information to aid in pagination."
+    edges: [SystemAutoIncrementEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [SystemAutoIncrement]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `SystemAutoIncrement`."
+type SystemAutoIncrementEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: SystemAutoIncrement
+}
+
+type SystemAutoIncrementUpdate {
+    "The corresponding item"
+    item: SystemAutoIncrement
+    updateState: UpdateType
+}
+
+type SystemAutoIncrementUpdateMessage {
+    "The corresponding items"
+    items: [SystemAutoIncrementUpdate]
+}
+
+"Association System.Related (Outbound) of entity type SystemAutoIncrement"
+type SystemAutoIncrement_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"Runtime entities of construction kit type 'System.Notification.Message'"
+type SystemNotificationMessage {
+    bodyText: String
+    constructionKitType: CkEntity
+    errorText: String
+    lastTryDateTime: DateTime
+    notificationType: Int
+    recipientAddress: String
+    relatesFrom: SystemNotificationMessage_RelatesFromUnion
+    relatesTo: SystemNotificationMessage_RelatesToUnion
+    rtId: OspObjectIdType
+    sendStatus: Int
+    sentDateTime: DateTime
+    subjectText: String
+    wellKnownName: String
+}
+
+"A connection to `SystemNotificationMessage`."
+type SystemNotificationMessageConnection {
+    "Information to aid in pagination."
+    edges: [SystemNotificationMessageEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [SystemNotificationMessage]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `SystemNotificationMessage`."
+type SystemNotificationMessageEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: SystemNotificationMessage
+}
+
+type SystemNotificationMessageUpdate {
+    "The corresponding item"
+    item: SystemNotificationMessage
+    updateState: UpdateType
+}
+
+type SystemNotificationMessageUpdateMessage {
+    "The corresponding items"
+    items: [SystemNotificationMessageUpdate]
+}
+
+"Association System.Related (Outbound) of entity type SystemNotificationMessage"
+type SystemNotificationMessage_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"Association System.Related (Inbound) of entity type SystemNotificationMessage"
+type SystemNotificationMessage_RelatesToUnion {
+    paketServiceAccountingItemConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceAccountingItemConnection
+    paketServiceAccountingRuleConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceAccountingRuleConnection
+    paketServiceContactConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceContactConnection
+    paketServiceParcelShipmentConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): PaketServiceParcelShipmentConnection
+    systemAutoIncrementConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemAutoIncrementConnection
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+    systemNotificationTemplateConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationTemplateConnection
+    systemQueryConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemQueryConnection
+    systemServiceHookConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemServiceHookConnection
+    systemUIPageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemUIPageConnection
+}
+
+"Runtime entities of construction kit type 'System.NotificationTemplate'"
+type SystemNotificationTemplate {
+    bodyTemplate: String
+    constructionKitType: CkEntity
+    relatesFrom: SystemNotificationTemplate_RelatesFromUnion
+    rtId: OspObjectIdType
+    subjectTemplate: String
+    type: Int
+    wellKnownName: String
+}
+
+"A connection to `SystemNotificationTemplate`."
+type SystemNotificationTemplateConnection {
+    "Information to aid in pagination."
+    edges: [SystemNotificationTemplateEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [SystemNotificationTemplate]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `SystemNotificationTemplate`."
+type SystemNotificationTemplateEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: SystemNotificationTemplate
+}
+
+type SystemNotificationTemplateUpdate {
+    "The corresponding item"
+    item: SystemNotificationTemplate
+    updateState: UpdateType
+}
+
+type SystemNotificationTemplateUpdateMessage {
+    "The corresponding items"
+    items: [SystemNotificationTemplateUpdate]
+}
+
+"Association System.Related (Outbound) of entity type SystemNotificationTemplate"
+type SystemNotificationTemplate_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"Runtime entities of construction kit type 'System.Query'"
+type SystemQuery {
+    attributeSearchFilter: String
+    columns: String
+    constructionKitType: CkEntity
+    fieldFilter: String
+    name: String
+    queryCkId: String
+    relatesFrom: SystemQuery_RelatesFromUnion
+    rtId: OspObjectIdType
+    sorting: String
+    textSearchFilter: String
+    wellKnownName: String
+}
+
+"A connection to `SystemQuery`."
+type SystemQueryConnection {
+    "Information to aid in pagination."
+    edges: [SystemQueryEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [SystemQuery]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `SystemQuery`."
+type SystemQueryEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: SystemQuery
+}
+
+type SystemQueryUpdate {
+    "The corresponding item"
+    item: SystemQuery
+    updateState: UpdateType
+}
+
+type SystemQueryUpdateMessage {
+    "The corresponding items"
+    items: [SystemQueryUpdate]
+}
+
+"Association System.Related (Outbound) of entity type SystemQuery"
+type SystemQuery_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"Runtime entities of construction kit type 'System.ServiceHook'"
+type SystemServiceHook {
+    constructionKitType: CkEntity
+    enabled: Boolean
+    fieldFilter: String
+    name: String
+    queryCkId: String
+    relatesFrom: SystemServiceHook_RelatesFromUnion
+    rtId: OspObjectIdType
+    serviceHookAction: String
+    serviceHookBaseUri: String
+    wellKnownName: String
+}
+
+"A connection to `SystemServiceHook`."
+type SystemServiceHookConnection {
+    "Information to aid in pagination."
+    edges: [SystemServiceHookEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [SystemServiceHook]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `SystemServiceHook`."
+type SystemServiceHookEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: SystemServiceHook
+}
+
+type SystemServiceHookUpdate {
+    "The corresponding item"
+    item: SystemServiceHook
+    updateState: UpdateType
+}
+
+type SystemServiceHookUpdateMessage {
+    "The corresponding items"
+    items: [SystemServiceHookUpdate]
+}
+
+"Association System.Related (Outbound) of entity type SystemServiceHook"
+type SystemServiceHook_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"Runtime entities of construction kit type 'System.UI.Page'"
+type SystemUIPage {
+    constructionKitType: CkEntity
+    content: String
+    relatesFrom: SystemUIPage_RelatesFromUnion
+    rtId: OspObjectIdType
+    wellKnownName: String
+}
+
+"A connection to `SystemUIPage`."
+type SystemUIPageConnection {
+    "Information to aid in pagination."
+    edges: [SystemUIPageEdge]
+    "A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for \"{ edges { node } }\" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the \"cursor\" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full \"{ edges { node } } \" version should be used instead."
+    items: [SystemUIPage]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+    "A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing \"5\" as the argument to `first`, then fetch the total count so it could display \"5 of 83\", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`."
+    totalCount: Int
+}
+
+"An edge in a connection from an object to another object of type `SystemUIPage`."
+type SystemUIPageEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: SystemUIPage
+}
+
+type SystemUIPageUpdate {
+    "The corresponding item"
+    item: SystemUIPage
+    updateState: UpdateType
+}
+
+type SystemUIPageUpdateMessage {
+    "The corresponding items"
+    items: [SystemUIPageUpdate]
+}
+
+"Association System.Related (Outbound) of entity type SystemUIPage"
+type SystemUIPage_RelatesFromUnion {
+    systemNotificationMessageConnection(
+        "Only look at connected edges with cursors greater than the value of `after`."
+        after: String,
+        "Filters items based on field compare"
+        fieldFilter: [FieldFilter],
+        "Specifies the number of edges to return starting from `after` or the first entry if `after` is not specified."
+        first: Int,
+        "Returns the entity with the given rtId."
+        rtId: OspObjectIdType,
+        "Returns entities with the given rtIds."
+        rtIds: [OspObjectIdType],
+        "Filters items based on text search"
+        searchFilter: SearchFilter,
+        "Sort order for items"
+        sortOrder: [Sort]
+    ): SystemNotificationMessageConnection
+}
+
+"Defines the type of modification during write operations"
+enum AssociationModOptions {
+    CREATE
+    DELETE
+}
+
+"Enum of valid attribute types"
+enum AttributeValueType {
+    BINARY
+    BOOLEAN
+    DATE_TIME
+    DOUBLE
+    INT
+    INT_ARRAY
+    STRING
+    STRING_ARRAY
+}
+
+"Defines the operator of field compare"
+enum FieldFilterOperators {
+    EQUALS
+    GREATER_EQUAL_THAN
+    GREATER_THAN
+    IN
+    LESS_EQUAL_THAN
+    LESS_THAN
+    LIKE
+    MATCH_REG_EX
+    NOT_EQUALS
+    NOT_IN
+    NOT_MATCH_REG_EX
+}
+
+"The scope of the construction kit model"
+enum Scopes {
+    APPLICATION
+    LAYER_2
+    LAYER_3
+    LAYER_4
+    SYSTEM
+}
+
+"The type of search that is used (a text based search using text analysis (high performance, scoring, maybe more false positives) or filtering of attributes (lower performance, more exact results)"
+enum SearchFilterTypes {
+    ATTRIBUTE_FILTER
+    TEXT_SEARCH
+}
+
+"Defines the sort order"
+enum SortOrders {
+    ASCENDING
+    DEFAULT
+    DESCENDING
+}
+
+"Enum of valid update types"
+enum UpdateType {
+    DELETE
+    INSERT
+    REPLACE
+    UNDEFINED
+    UPDATE
+}
+
+input DeletionPaketServiceAccountingItemInput {
+    rtId: OspObjectIdType
+}
+
+input DeletionPaketServiceAccountingRuleInput {
+    rtId: OspObjectIdType
+}
+
+input DeletionPaketServiceContactInput {
+    rtId: OspObjectIdType
+}
+
+input DeletionPaketServiceParcelShipmentInput {
+    rtId: OspObjectIdType
+}
+
+input DeletionSystemAutoIncrementInput {
+    rtId: OspObjectIdType
+}
+
+input DeletionSystemNotificationMessageInput {
+    rtId: OspObjectIdType
+}
+
+input DeletionSystemNotificationTemplateInput {
+    rtId: OspObjectIdType
+}
+
+input DeletionSystemQueryInput {
+    rtId: OspObjectIdType
+}
+
+input DeletionSystemServiceHookInput {
+    rtId: OspObjectIdType
+}
+
+input DeletionSystemUIPageInput {
+    rtId: OspObjectIdType
+}
+
+input FieldFilter {
+    attributeName: String!
+    comparisonValue: SimpleScalarType
+    operator: FieldFilterOperators
+}
+
+input PaketServiceAccountingItemInput {
+    amount: Int
+    billed: [RtAssociationInput]
+    chargeType: Int
+    createdDateTime: DateTime
+    description: String
+    metaData: String
+    price: Decimal
+    relatesFrom: [RtAssociationInput]
+    wellKnownName: String
+}
+
+input PaketServiceAccountingRuleInput {
+    comment: String
+    enabled: Boolean
+    price: Decimal
+    relatesFrom: [RtAssociationInput]
+    type: Int
+    validFrom: DateTime
+    wellKnownName: String
+}
+
+input PaketServiceContactInput {
+    accountingType: Int
+    additionalLine: String
+    allowsNewsLetter: Boolean
+    billings: [RtAssociationInput]
+    breachOfLaw: String
+    children: [RtAssociationInput]
+    city: String
+    comment: String
+    companyName: String
+    country: String
+    creationDateTime: DateTime
+    dateOfBirth: DateTime
+    district: String
+    eMailAddress: String
+    firstName: String
+    freeParcelShipmentCount: Int
+    identificationType: String
+    lastName: String
+    memberName: String
+    memorandum: String
+    notificationType: Int
+    paysAttentionBy: String
+    phoneNumberFax: String
+    phoneNumberLandLine: String
+    phoneNumberMobile: String
+    postalCode: Int
+    relatesFrom: [RtAssociationInput]
+    salutation: String
+    serviceNumber: String
+    street: String
+    subscriptionType: Int
+    title: String
+    wellKnownName: String
+}
+
+input PaketServiceParcelShipmentInput {
+    addressResolveFee: Boolean
+    availableDateTime: DateTime
+    billings: [RtAssociationInput]
+    cashExpenseService: Boolean
+    cashExpenseSumAdvanced: Decimal
+    comment: String
+    creationDateTime: DateTime
+    deliveryDateTime: DateTime
+    deliveryLocation: Int
+    deliveryService: String
+    fetchDateTime: DateTime
+    fetchedBy: String
+    identificationNumber: String
+    internalId: Int
+    lastNotificationSent: DateTime
+    lastTryNotificationSent: DateTime
+    mailingType: Int
+    notificationAcknowledged: Boolean
+    parent: [RtAssociationInput]
+    relatesFrom: [RtAssociationInput]
+    returnShipmentType: Int
+    sender: String
+    state: Int
+    storageLocation: String
+    unitCount: Int
+    weight: Decimal
+    wellKnownName: String
+}
+
+"Input field for associations"
+input RtAssociationInput {
+    "Type of modification."
+    modOption: AssociationModOptions
+    "Runtime ID of the target entity"
+    target: RtEntityId!
+}
+
+"Id information consists of CkId and RtId"
+input RtEntityId {
+    "Construction kit id of the object."
+    ckId: String!
+    "Unique id of the object."
+    rtId: OspObjectIdType!
+}
+
+input SearchFilter {
+    attributeNames: [String]
+    language: String
+    searchTerm: String!
+    type: SearchFilterTypes
+}
+
+input Sort {
+    attributeName: String!
+    sortOrder: SortOrders
+}
+
+input SystemAutoIncrementInput {
+    currentValue: Int
+    end: Int
+    relatesFrom: [RtAssociationInput]
+    start: Int
+    wellKnownName: String
+}
+
+input SystemNotificationMessageInput {
+    bodyText: String
+    errorText: String
+    lastTryDateTime: DateTime
+    notificationType: Int
+    recipientAddress: String
+    relatesFrom: [RtAssociationInput]
+    relatesTo: [RtAssociationInput]
+    sendStatus: Int
+    sentDateTime: DateTime
+    subjectText: String
+    wellKnownName: String
+}
+
+input SystemNotificationTemplateInput {
+    bodyTemplate: String
+    relatesFrom: [RtAssociationInput]
+    subjectTemplate: String
+    type: Int
+    wellKnownName: String
+}
+
+input SystemQueryInput {
+    attributeSearchFilter: String
+    columns: String
+    fieldFilter: String
+    name: String
+    queryCkId: String
+    relatesFrom: [RtAssociationInput]
+    sorting: String
+    textSearchFilter: String
+    wellKnownName: String
+}
+
+input SystemServiceHookInput {
+    enabled: Boolean
+    fieldFilter: String
+    name: String
+    queryCkId: String
+    relatesFrom: [RtAssociationInput]
+    serviceHookAction: String
+    serviceHookBaseUri: String
+    wellKnownName: String
+}
+
+input SystemUIPageInput {
+    content: String
+    relatesFrom: [RtAssociationInput]
+    wellKnownName: String
+}
+
+input UpdatePaketServiceAccountingItemInput {
+    "Item to update"
+    item: PaketServiceAccountingItemInput!
+    rtId: OspObjectIdType
+}
+
+input UpdatePaketServiceAccountingRuleInput {
+    "Item to update"
+    item: PaketServiceAccountingRuleInput!
+    rtId: OspObjectIdType
+}
+
+input UpdatePaketServiceContactInput {
+    "Item to update"
+    item: PaketServiceContactInput!
+    rtId: OspObjectIdType
+}
+
+input UpdatePaketServiceParcelShipmentInput {
+    "Item to update"
+    item: PaketServiceParcelShipmentInput!
+    rtId: OspObjectIdType
+}
+
+input UpdateSystemAutoIncrementInput {
+    "Item to update"
+    item: SystemAutoIncrementInput!
+    rtId: OspObjectIdType
+}
+
+input UpdateSystemNotificationMessageInput {
+    "Item to update"
+    item: SystemNotificationMessageInput!
+    rtId: OspObjectIdType
+}
+
+input UpdateSystemNotificationTemplateInput {
+    "Item to update"
+    item: SystemNotificationTemplateInput!
+    rtId: OspObjectIdType
+}
+
+input UpdateSystemQueryInput {
+    "Item to update"
+    item: SystemQueryInput!
+    rtId: OspObjectIdType
+}
+
+input UpdateSystemServiceHookInput {
+    "Item to update"
+    item: SystemServiceHookInput!
+    rtId: OspObjectIdType
+}
+
+input UpdateSystemUIPageInput {
+    "Item to update"
+    item: SystemUIPageInput!
+    rtId: OspObjectIdType
+}
+
+
+scalar OspObjectIdType
+
+scalar SimpleScalarType
+
+"The `DateTime` scalar type represents a date and time. `DateTime` expects timestamps to be formatted in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard."
+scalar DateTime
+
+scalar Decimal

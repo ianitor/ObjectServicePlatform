@@ -1,0 +1,28 @@
+query getCkEntities(
+  $after: String
+  $first: Int
+  $searchFilter: SearchFilter
+  $fieldFilters: [FieldFilter]
+  $sort: [Sort]
+  $ckId: String
+) {
+  constructionKitTypes(
+    after: $after
+    first: $first
+    searchFilter: $searchFilter
+    fieldFilter: $fieldFilters
+    sortOrder: $sort
+    ckId: $ckId
+  ) {
+    totalCount
+    items {
+      baseType {
+        ckId
+      }
+      ckId
+      scopeId
+      isAbstract
+      isFinal
+    }
+  }
+}

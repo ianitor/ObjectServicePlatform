@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata minServiceClientVersion="3.6">
+    <id>Ianitor.Osp.ManagementTool</id>
+    <version>$version$</version>
+    <title>Object Service Platform Management Tool</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://www.salzburgdev.at/license/</licenseUrl>
+    <projectUrl>http://www.salzburgdev.at</projectUrl>
+    <iconUrl>http://www.salzburgdev.at/salzburgdev64/</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Management Tool for Object Service Platform, that allows to create, delete and import construction kit and runtime models.</description>
+    <copyright>$copyright$</copyright>
+    <tags>OSP</tags>
+    <developmentDependency>true</developmentDependency>
+  </metadata>
+  <files>
+    <file src="$targetDir$netcoreapp3.1\win10-x64\publish\*.exe" target="tools/" />
+    <file src="$targetDir$netcoreapp3.1\win10-x64\publish\OspTool.deps.json" target="tools/" />
+    <file src="$targetDir$netcoreapp3.1\win10-x64\publish\OspTool.runtimeconfig.json" target="tools/" />
+    <file src="$targetDir$netcoreapp3.1\win10-x64\publish\*.exe.config" target="tools/" />
+    <file src="$targetDir$netcoreapp3.1\win10-x64\publish\NLog.config" target="tools/" />
+    <file src="$targetDir$netcoreapp3.1\win10-x64\publish\**\*.dll" target="tools/" />
+    <file src="build/Ianitor.Osp.ManagementTool.props" target="build/" />
+    <file src="content/ConstructionKitModel.json" target="content/" />
+    <file src="content/RuntimeModel.json" target="content/" />
+    <file src="content/DeployOspDatabase.ps1" target="content/" />
+  </files>
+
+</package>

@@ -1,0 +1,15 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <OspToolPath>$(MSBuildThisFileDirectory)..\tools\OspTool.exe</OspToolPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <OspToolFiles Include="$(MSBuildThisFileDirectory)..\tools\**\*.*" />
+  </ItemGroup>
+
+  <Target Name="CopyOspToolToOutput" AfterTargets="CoreCompile">
+    <Copy SourceFiles="@(OspToolFiles)" DestinationFolder="$(TargetDir)OspTool\%(RecursiveDir)" />
+  </Target>
+
+</Project>

@@ -1,0 +1,38 @@
+@model Ianitor.Osp.Backend.Identity.ViewModels.Device.DeviceUserCodeCaptureViewModel
+
+@{
+    ViewBag.Title = Texts.Backend_Identity_Device_Authorize_Title;
+}
+
+<div class="row justify-content-center">
+    <h1>@Texts.Backend_Identity_Device_Authorize_Title</h1>
+</div>
+
+
+<div class="row justify-content-center">
+    <div class="col-sm-4">
+        <form asp-action="UserCodeCapture" method="post">
+
+            <div class="k-card">
+                <div class="k-card-header">
+                    <h5 class="k-card-title">
+                        @Texts.Backend_Identity_Device_Authorize_Subtitle
+                    </h5>
+                </div>
+                <div class="k-card-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <kendo-textbox name="UserCode" autofocus>
+                                <textbox-label content="@Texts.Backend_Identity_UserCode_Header" floating="true"/>
+                            </kendo-textbox>
+                            <span asp-validation-for="UserCode" class="sg-validation-error"></span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="k-card-actions k-card-actions-end">
+                    <button type="submit" class="k-button k-primary">@Texts.Backend_General_Submit_Header</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

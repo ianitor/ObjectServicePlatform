@@ -1,0 +1,15 @@
+query getServiceHookDetails($rtId: OspObjectIdType!) {
+  systemServiceHookConnection(rtId: $rtId) {
+    totalCount
+
+    items {
+      rtId
+      enabled
+      name
+      queryCkId
+      serviceHookAction
+      serviceHookBaseUri
+      fieldFilter
+    }
+  }
+}

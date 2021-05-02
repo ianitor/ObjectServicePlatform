@@ -1,0 +1,16 @@
+{
+  "name": "OSP GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "dev": {
+        "url": "https://localhost:5001/tenants/paketService/graphQL",
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "Authorization": "Bearer ${env:OSP-ACCESS-TOKEN}"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

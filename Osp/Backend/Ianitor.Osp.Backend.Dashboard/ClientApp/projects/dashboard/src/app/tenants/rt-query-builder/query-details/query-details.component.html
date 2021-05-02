@@ -1,0 +1,37 @@
+<div fxLayout="column" fxLayoutGap="10px" style="padding-top: 10px">
+    <div fxLayout="row" fxLayoutGap="8px">
+
+    <app-rtQueryBuilder-ck-selector fxFlex="50" [tenantId]="tenantId"
+                                    [ckFieldSelectBuilder]="rtQueryBuilder"></app-rtQueryBuilder-ck-selector>
+
+    <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <button fxFlex mat-raised-button type="button" (click)="onSelectColumns()"
+              [disabled]="!rtQueryBuilder.queryCkId">Columns
+      </button>
+      <button fxFlex mat-raised-button type="button" (click)="onSelectSorting()"
+              [disabled]="!rtQueryBuilder.queryCkId">Sorting
+      </button>
+
+      <button fxFlex mat-raised-button type="button" (click)="onSave()"
+              [disabled]="!rtQueryBuilder.queryCkId || rtQueryBuilder.selectedDataColumns.length === 0">
+        Save
+      </button>
+      <button fxFlex mat-raised-button type="button" (click)="onSaveAs()"
+              [disabled]="!rtQueryBuilder.queryCkId || rtQueryBuilder.selectedDataColumns.length === 0">
+        Save As
+      </button>
+    </div>
+  </div>
+
+
+  <app-rtQueryBuilder-field-filter-editor
+    [fieldFilterBuilder]="rtQueryBuilder"></app-rtQueryBuilder-field-filter-editor>
+
+  <mat-divider></mat-divider>
+  <h3>Results</h3>
+  <mat-divider></mat-divider>
+
+  <app-rtQueryBuilder-result-details [tenantId]="tenantId"
+                                     [rtQueryBuilder]="rtQueryBuilder"></app-rtQueryBuilder-result-details>
+
+</div>
